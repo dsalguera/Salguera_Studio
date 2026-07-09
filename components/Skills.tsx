@@ -79,14 +79,7 @@ function Marquee({
   const list = [...items, ...items];
 
   return (
-    <div className="relative overflow-hidden py-3">
-
-      {/* Fade Left */}
-      <div className="absolute left-0 top-0 z-10 h-full w-32 bg-gradient-to-r from-black to-transparent" />
-
-      {/* Fade Right */}
-      <div className="absolute right-0 top-0 z-10 h-full w-32 bg-gradient-to-l from-black to-transparent" />
-
+    <div className="overflow-hidden py-3">
       <motion.div
         className="flex gap-5 w-max"
         animate={{
