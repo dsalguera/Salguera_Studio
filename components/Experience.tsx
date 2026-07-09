@@ -115,11 +115,11 @@ export default function Experience() {
 
                   <div className="absolute left-0 top-3 flex items-center justify-center w-8 h-8">
 
-                    {/* Breathing Glow */}
+                    {/* Ambient Glow */}
                     <motion.div
                       animate={{
                         scale: [1, 1.25, 1],
-                        opacity: [0.15, 0.4, 0.15],
+                        opacity: [0.15, 0.35, 0.15],
                       }}
                       transition={{
                         duration: 2.8,
@@ -130,7 +130,7 @@ export default function Experience() {
                       className="absolute w-8 h-8 rounded-full bg-violet-500/25 blur-md"
                     />
 
-                    {/* Heartbeat Ring */}
+                    {/* White Heartbeat Ring */}
                     <motion.div
                       animate={{
                         scale: [1, 1.15, 1, 1.15, 1],
@@ -139,25 +139,25 @@ export default function Experience() {
                         duration: 1.8,
                         repeat: Infinity,
                         ease: "easeInOut",
-                        times: [0, .12, .24, .36, 1],
-                        delay: index * .18,
+                        times: [0, 0.12, 0.24, 0.36, 1],
+                        delay: index * 0.18,
                       }}
-                      className="absolute w-5 h-5 rounded-full border border-violet-400/40 bg-violet-500/10 backdrop-blur-md"
+                      className="absolute w-5 h-5 rounded-full border border-white/70 bg-white/5 backdrop-blur-md"
                     />
 
-                    {/* Core */}
+                    {/* Purple Core */}
                     <motion.div
                       animate={{
-                        scale: [1, 1.35, 1, 1.35, 1],
+                        scale: [1, 1.3, 1, 1.3, 1],
                       }}
                       transition={{
                         duration: 1.8,
                         repeat: Infinity,
                         ease: "easeInOut",
-                        times: [0, .12, .24, .36, 1],
-                        delay: index * .18,
+                        times: [0, 0.12, 0.24, 0.36, 1],
+                        delay: index * 0.18,
                       }}
-                      className="w-3 h-3 rounded-full bg-gradient-to-br from-violet-300 to-indigo-500 shadow-[0_0_20px_rgba(139,92,246,.9)]"
+                      className="w-3 h-3 rounded-full bg-gradient-to-br from-violet-300 via-violet-400 to-indigo-500 shadow-[0_0_18px_rgba(139,92,246,.85)]"
                     />
 
                   </div>
