@@ -31,12 +31,10 @@ import {
 
 import { TbBrandCSharp } from "react-icons/tb";
 
-
 type Tech = {
   name: string;
   icon: React.ReactNode;
 };
-
 
 const languages: Tech[] = [
   { name: "Java", icon: <FaJava /> },
@@ -51,7 +49,6 @@ const languages: Tech[] = [
   { name: "CSS3", icon: <FaCss3Alt /> },
 ];
 
-
 const frameworks: Tech[] = [
   { name: "React", icon: <FaReact /> },
   { name: "Next.js", icon: <SiNextdotjs /> },
@@ -60,7 +57,6 @@ const frameworks: Tech[] = [
   { name: "Bootstrap", icon: <FaBootstrap /> },
   { name: "Tailwind CSS", icon: <SiTailwindcss /> },
 ];
-
 
 const tools: Tech[] = [
   { name: "MySQL", icon: <SiMysql /> },
@@ -83,7 +79,7 @@ function TechCard({
   return (
     <motion.div
       animate={{
-        y: index % 2 === 0 ? [0, -8, 0] : [0, 8, 0],
+        y: index % 2 === 0 ? [0, -6, 0] : [0, 6, 0],
       }}
       transition={{
         duration: 4 + (index % 3),
@@ -94,56 +90,26 @@ function TechCard({
         scale: 1.08,
         rotateX: 8,
         rotateY: -8,
-        y: -12,
+        y: -10,
       }}
       style={{
         transformStyle: "preserve-3d",
       }}
-      className="
-        group
-        relative
-        flex
-        items-center
-        gap-4
-        px-6
-        py-4
-        overflow-hidden
-        rounded-3xl
-        border
-        border-white/10
-        bg-white/5
-        backdrop-blur-2xl
-        transition-all
-        duration-500
-        hover:border-violet-400/50
-        hover:bg-white/10
-        hover:shadow-[0_0_50px_rgba(139,92,246,.18)]
-        whitespace-nowrap
-      "
+      className="group relative flex items-center gap-4 px-5 py-3 overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-2xl transition-all duration-500 hover:border-violet-400/50 hover:bg-white/10 hover:shadow-[0_0_40px_rgba(139,92,246,.18)] whitespace-nowrap"
     >
 
-      {/* Glass Reflection */}
+      {/* Glass reflection */}
       <motion.div
         animate={{
           x: ["-250%", "250%"],
         }}
         transition={{
-          duration: 5,
+          duration: 8,
           repeat: Infinity,
           ease: "linear",
-          delay: index * 0.25,
+          delay: index * 0.3,
         }}
-        className="
-          absolute
-          inset-y-0
-          w-16
-          rotate-12
-          bg-gradient-to-r
-          from-transparent
-          via-white/20
-          to-transparent
-          blur-xl
-        "
+        className="absolute inset-y-0 w-14 rotate-12 bg-gradient-to-r from-transparent via-white/20 to-transparent blur-xl"
       />
 
 
@@ -157,32 +123,16 @@ function TechCard({
           type: "spring",
           stiffness: 300,
         }}
-        className="
-          relative
-          z-10
-          text-3xl
-          text-violet-300
-          group-hover:text-white
-          transition-colors
-        "
+        className="relative z-10 text-3xl text-violet-300 group-hover:text-white transition-colors"
       >
         {tech.icon}
       </motion.div>
 
 
       {/* Name */}
-      <span
-        className="
-          relative
-          z-10
-          text-white
-          font-medium
-          tracking-wide
-        "
-      >
+      <span className="relative z-10 text-white font-medium tracking-wide">
         {tech.name}
       </span>
-
 
     </motion.div>
   );
@@ -202,25 +152,12 @@ function Marquee({
   const list = [...items, ...items];
 
   return (
-    <div
-      className="
-        overflow-hidden
-        py-6
-        [perspective:1200px]
-      "
-    >
+    <div className="overflow-hidden [perspective:1200px]">
 
       <motion.div
-        className="
-          flex
-          items-center
-          gap-6
-          w-max
-        "
+        className="flex items-center gap-5 w-max"
         animate={{
-          x: reverse
-            ? ["-50%", "0%"]
-            : ["0%", "-50%"],
+          x: reverse ? ["-50%", "0%"] : ["0%", "-50%"],
         }}
         transition={{
           duration,
@@ -228,7 +165,6 @@ function Marquee({
           ease: "linear",
         }}
       >
-
         {list.map((tech, index) => (
           <TechCard
             key={index}
@@ -236,7 +172,6 @@ function Marquee({
             index={index}
           />
         ))}
-
       </motion.div>
 
     </div>
@@ -244,74 +179,44 @@ function Marquee({
 }
 
 
-
 export default function Skills() {
-
   return (
-
     <section
       id="skills"
       className="py-32 overflow-hidden"
     >
 
-      <div className="
-        max-w-6xl
-        mx-auto
-        px-6
-      ">
+      <div className="max-w-6xl mx-auto px-6">
 
-
-        <p className="
-          uppercase
-          tracking-[0.3em]
-          text-violet-400
-          text-sm
-          mb-4
-        ">
+        <p className="uppercase tracking-[0.3em] text-violet-400 text-sm mb-4">
           TECH STACK
         </p>
 
-
-        <h2 className="
-          text-5xl
-          md:text-6xl
-          font-black
-          leading-tight
-        ">
+        <h2 className="text-5xl md:text-6xl font-black">
           Building with modern technologies.
         </h2>
 
-
-        <p className="
-          mt-6
-          max-w-2xl
-          text-lg
-          text-zinc-400
-          leading-relaxed
-        ">
+        <p className="mt-6 max-w-2xl text-lg text-zinc-400 leading-relaxed">
           From low-level programming languages to modern frontend
           frameworks, backend systems, databases, deployment,
           and design tools.
         </p>
 
-
       </div>
 
 
-      <div className="mt-20">
+      <div className="mt-16 space-y-6">
 
         <Marquee
           items={languages}
           duration={42}
         />
 
-
         <Marquee
           items={frameworks}
           reverse
           duration={48}
         />
-
 
         <Marquee
           items={tools}
@@ -320,8 +225,6 @@ export default function Skills() {
 
       </div>
 
-
     </section>
-
   );
 }
