@@ -131,22 +131,77 @@ export default function Experience() {
 
                   <div className="absolute left-0 top-3 flex items-center justify-center w-8 h-8">
 
+                    {/* Soft breathing glow */}
                     <motion.div
                       animate={{
-                        scale: [1, 2.2],
-                        opacity: [0.45, 0],
+                        scale: [1, 1.25, 1],
+                        opacity: [0.15, 0.4, 0.15],
                       }}
                       transition={{
-                        duration: 2.5,
+                        duration: 2.8,
                         repeat: Infinity,
-                        delay: index * 0.4,
+                        repeatType: "loop",
+                        ease: "easeInOut",
+                        delay: index * 0.25,
                       }}
-                      className="absolute w-8 h-8 rounded-full bg-cyan-400/30"
+                      className="
+                        absolute
+                        w-8
+                        h-8
+                        rounded-full
+                        bg-violet-500/30
+                        blur-md
+                      "
                     />
 
-                    <div className="absolute w-6 h-6 rounded-full border border-cyan-400/40 bg-cyan-500/10 backdrop-blur-md" />
+                    {/* Heartbeat */}
+                    <motion.div
+                      animate={{
+                        scale: [1, 1.15, 1, 1.15, 1],
+                      }}
+                      transition={{
+                        duration: 1.8,
+                        repeat: Infinity,
+                        repeatType: "loop",
+                        ease: "easeInOut",
+                        times: [0, .12, .24, .36, 1],
+                        delay: index * 0.18,
+                      }}
+                      className="
+                        absolute
+                        w-5
+                        h-5
+                        rounded-full
+                        border
+                        border-violet-400/40
+                        bg-violet-500/10
+                        backdrop-blur-md
+                      "
+                    />
 
-                    <div className="w-3 h-3 rounded-full bg-cyan-300 shadow-[0_0_18px_rgba(34,211,238,.9)]" />
+                    {/* Core */}
+                    <motion.div
+                      animate={{
+                        scale: [1, 1.35, 1, 1.35, 1],
+                      }}
+                      transition={{
+                        duration: 1.8,
+                        repeat: Infinity,
+                        repeatType: "loop",
+                        ease: "easeInOut",
+                        times: [0, .12, .24, .36, 1],
+                        delay: index * 0.18,
+                      }}
+                      className="
+                        w-3
+                        h-3
+                        rounded-full
+                        bg-gradient-to-br
+                        from-violet-300
+                        to-indigo-500
+                        shadow-[0_0_18px_rgba(139,92,246,.8)]
+                      "
+                    />
 
                   </div>
 
