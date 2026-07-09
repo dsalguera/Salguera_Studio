@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+
 import {
   FaJava,
   FaReact,
@@ -31,10 +32,12 @@ import {
 
 import { TbBrandCSharp } from "react-icons/tb";
 
+
 type Tech = {
   name: string;
   icon: React.ReactNode;
 };
+
 
 const languages: Tech[] = [
   { name: "Java", icon: <FaJava /> },
@@ -49,6 +52,7 @@ const languages: Tech[] = [
   { name: "CSS3", icon: <FaCss3Alt /> },
 ];
 
+
 const frameworks: Tech[] = [
   { name: "React", icon: <FaReact /> },
   { name: "Next.js", icon: <SiNextdotjs /> },
@@ -57,6 +61,7 @@ const frameworks: Tech[] = [
   { name: "Bootstrap", icon: <FaBootstrap /> },
   { name: "Tailwind CSS", icon: <SiTailwindcss /> },
 ];
+
 
 const tools: Tech[] = [
   { name: "MySQL", icon: <SiMysql /> },
@@ -76,67 +81,123 @@ function TechCard({
   tech: Tech;
   index: number;
 }) {
+
   return (
     <motion.div
+
       animate={{
-        y: index % 2 === 0 ? [0, -6, 0] : [0, 6, 0],
+        y: index % 2 === 0
+          ? [0, -3, 0]
+          : [0, 3, 0],
       }}
+
       transition={{
         duration: 4 + (index % 3),
         repeat: Infinity,
         ease: "easeInOut",
       }}
+
       whileHover={{
         scale: 1.08,
         rotateX: 8,
         rotateY: -8,
-        y: -10,
+        y: -8,
       }}
+
       style={{
         transformStyle: "preserve-3d",
       }}
-      className="group relative flex items-center gap-4 px-5 py-3 overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-2xl transition-all duration-500 hover:border-violet-400/50 hover:bg-white/10 hover:shadow-[0_0_40px_rgba(139,92,246,.18)] whitespace-nowrap"
+
+      className="
+        group
+        relative
+        flex
+        items-center
+        gap-3
+        px-6
+        py-3
+        overflow-hidden
+        rounded-full
+        border
+        border-white/10
+        bg-white/5
+        backdrop-blur-2xl
+        transition-all
+        duration-500
+        hover:border-violet-400/50
+        hover:bg-white/10
+        hover:shadow-[0_0_40px_rgba(139,92,246,.18)]
+        whitespace-nowrap
+      "
     >
 
-      {/* Glass reflection */}
       <motion.div
         animate={{
           x: ["-250%", "250%"],
         }}
+
         transition={{
           duration: 8,
           repeat: Infinity,
           ease: "linear",
           delay: index * 0.3,
         }}
-        className="absolute inset-y-0 w-14 rotate-12 bg-gradient-to-r from-transparent via-white/20 to-transparent blur-xl"
+
+        className="
+          absolute
+          inset-y-0
+          w-14
+          rotate-12
+          bg-gradient-to-r
+          from-transparent
+          via-white/20
+          to-transparent
+          blur-xl
+        "
       />
 
 
-      {/* Icon */}
       <motion.div
+
         whileHover={{
           scale: 1.25,
           rotate: -10,
         }}
+
         transition={{
           type: "spring",
           stiffness: 300,
         }}
-        className="relative z-10 text-3xl text-violet-300 group-hover:text-white transition-colors"
+
+        className="
+          relative
+          z-10
+          text-3xl
+          text-violet-300
+          group-hover:text-white
+          transition-colors
+        "
       >
         {tech.icon}
       </motion.div>
 
 
-      {/* Name */}
-      <span className="relative z-10 text-white font-medium tracking-wide">
+      <span
+        className="
+          relative
+          z-10
+          text-white
+          font-medium
+          tracking-wide
+        "
+      >
         {tech.name}
       </span>
 
     </motion.div>
   );
 }
+
 
 
 function Marquee({
@@ -152,65 +213,132 @@ function Marquee({
   const list = [...items, ...items];
 
   return (
-    <div className="overflow-hidden [perspective:1200px]">
+
+    <div
+      className="
+        relative
+        overflow-hidden
+        [perspective:1200px]
+      "
+    >
 
       <motion.div
-        className="flex items-center gap-5 w-max"
+
+        className="
+          flex
+          items-center
+          gap-5
+          w-max
+        "
+
         animate={{
-          x: reverse ? ["-50%", "0%"] : ["0%", "-50%"],
+          x: reverse
+            ? ["-50%", "0%"]
+            : ["0%", "-50%"],
         }}
+
         transition={{
           duration,
           repeat: Infinity,
           ease: "linear",
         }}
+
       >
+
         {list.map((tech, index) => (
+
           <TechCard
             key={index}
             tech={tech}
             index={index}
           />
+
         ))}
+
       </motion.div>
 
     </div>
+
   );
 }
 
 
+
 export default function Skills() {
+
   return (
+
     <section
       id="skills"
-      className="py-32 overflow-hidden"
+      className="
+        py-32
+        overflow-hidden
+      "
     >
 
-      <div className="max-w-6xl mx-auto px-6">
+      <div
+        className="
+          max-w-6xl
+          mx-auto
+          px-6
+        "
+      >
 
-        <p className="uppercase tracking-[0.3em] text-violet-400 text-sm mb-4">
+        <p
+          className="
+            uppercase
+            tracking-[0.3em]
+            text-violet-400
+            text-sm
+            mb-4
+          "
+        >
           TECH STACK
         </p>
 
-        <h2 className="text-5xl md:text-6xl font-black">
+
+        <h2
+          className="
+            text-5xl
+            md:text-6xl
+            font-black
+          "
+        >
           Building with modern technologies.
         </h2>
 
-        <p className="mt-6 max-w-2xl text-lg text-zinc-400 leading-relaxed">
+
+        <p
+          className="
+            mt-6
+            max-w-2xl
+            text-lg
+            text-zinc-400
+            leading-relaxed
+          "
+        >
           From low-level programming languages to modern frontend
           frameworks, backend systems, databases, deployment,
           and design tools.
         </p>
 
+
       </div>
 
 
-      <div className="mt-16 space-y-6">
+      <div
+        className="
+          mt-16
+          space-y-3
+          py-8
+        "
+      >
 
         <Marquee
           items={languages}
           duration={42}
         />
+
 
         <Marquee
           items={frameworks}
@@ -218,13 +346,17 @@ export default function Skills() {
           duration={48}
         />
 
+
         <Marquee
           items={tools}
           duration={55}
         />
 
+
       </div>
 
+
     </section>
+
   );
 }
