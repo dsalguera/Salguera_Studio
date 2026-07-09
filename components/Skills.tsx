@@ -158,7 +158,6 @@ function TechCard({
 
 
       <motion.div
-
         whileHover={{
           scale: 1.25,
           rotate: -10,
@@ -212,18 +211,18 @@ function Marquee({
 
   const list = [...items, ...items];
 
-  return (
 
+  return (
     <div
       className="
         relative
-        overflow-hidden
+        overflow-visible
+        py-2
         [perspective:1200px]
       "
     >
 
       <motion.div
-
         className="
           flex
           items-center
@@ -258,7 +257,6 @@ function Marquee({
       </motion.div>
 
     </div>
-
   );
 }
 
@@ -267,7 +265,6 @@ function Marquee({
 export default function Skills() {
 
   return (
-
     <section
       id="skills"
       className="
@@ -322,7 +319,6 @@ export default function Skills() {
           and design tools.
         </p>
 
-
       </div>
 
 
@@ -330,7 +326,8 @@ export default function Skills() {
         className="
           mt-16
           space-y-3
-          py-8
+          py-10
+          overflow-hidden
         "
       >
 
@@ -352,11 +349,9 @@ export default function Skills() {
           duration={55}
         />
 
-
       </div>
 
 
     </section>
-
   );
 }
