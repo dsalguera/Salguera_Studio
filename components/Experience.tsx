@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { AnimatePresence, motion } from "framer-motion";
+import { FaChevronDown } from "react-icons/fa";
 import ScrollReveal from "./ScrollReveal";
 
 const experience = [
@@ -20,7 +21,6 @@ const experience = [
       "Maintained organized workflows to meet project deadlines.",
     ],
   },
-
   {
     role: "Graphic Designer & Office Coordinator",
     company: "AdventHealth Central Florida",
@@ -34,7 +34,6 @@ const experience = [
       "Created marketing materials and promotional graphics.",
     ],
   },
-
   {
     role: "Computer & Server Technician",
     company: "MKB Technology",
@@ -47,7 +46,6 @@ const experience = [
       "Documented troubleshooting procedures and test results.",
     ],
   },
-
   {
     role: "Graphic Designer & Web Developer",
     company: "Pixels Santa Cruz",
@@ -61,7 +59,6 @@ const experience = [
       "Participated in code reviews and quality improvements.",
     ],
   },
-
   {
     role: "Customer Service Representative",
     company: "IBEX Global",
@@ -84,133 +81,237 @@ export default function Experience() {
       className="max-w-6xl mx-auto px-6 py-32"
     >
       <ScrollReveal>
-        <h2 className="text-4xl font-bold mb-20">
-          Work Experience
-        </h2>
+        <div className="mb-20">
+          <p className="uppercase tracking-[0.25em] text-cyan-400 text-sm mb-4">
+            CAREER
+          </p>
+
+          <h2 className="text-5xl font-black">
+            Work Experience
+          </h2>
+
+          <p className="text-zinc-400 mt-4 max-w-2xl leading-relaxed">
+            A journey through graphic design, software development,
+            IT infrastructure, and e-commerce—building solutions that
+            combine creativity with technology.
+          </p>
+        </div>
       </ScrollReveal>
 
       <div className="relative">
-        {/* Timeline Line */}
-        <div className="absolute left-4 top-0 bottom-0 w-[2px] bg-white/10" />
+
+        {/* Timeline */}
+        <div
+          className="
+            absolute
+            left-4
+            top-0
+            bottom-0
+            w-[2px]
+            bg-gradient-to-b
+            from-cyan-400/70
+            via-white/10
+            to-purple-500/60
+          "
+        />
 
         <div className="space-y-10">
+
           {experience.map((job, index) => {
+
             const isOpen = openCard === index;
 
             return (
-              <ScrollReveal key={index}>
-                <div className="relative pl-16">
-                  {/* Timeline Dot */}
-                  <div
-                    className="
-                      absolute
-                      left-0
-                      top-3
-                      h-8
-                      w-8
-                      rounded-full
-                      bg-white
-                      shadow-[0_0_20px_rgba(255,255,255,0.5)]
-                    "
-                  />
 
-                  <div
+              <ScrollReveal key={index}>
+
+                <div className="relative pl-16">
+
+                  {/* Timeline Dot */}
+
+                  <div className="absolute left-0 top-3 flex items-center justify-center w-8 h-8">
+
+                    <motion.div
+                      animate={{
+                        scale: [1, 2.2],
+                        opacity: [0.45, 0],
+                      }}
+                      transition={{
+                        duration: 2.5,
+                        repeat: Infinity,
+                        delay: index * 0.4,
+                      }}
+                      className="absolute w-8 h-8 rounded-full bg-cyan-400/30"
+                    />
+
+                    <div className="absolute w-6 h-6 rounded-full border border-cyan-400/40 bg-cyan-500/10 backdrop-blur-md" />
+
+                    <div className="w-3 h-3 rounded-full bg-cyan-300 shadow-[0_0_18px_rgba(34,211,238,.9)]" />
+
+                  </div>
+
+                  {/* Card */}
+
+                  <motion.div
+                    whileHover={{
+                      y: -4,
+                    }}
+                    transition={{
+                      duration: .25,
+                    }}
                     className="
                       bg-white/5
                       border
                       border-white/10
                       rounded-2xl
-                      backdrop-blur-lg
+                      backdrop-blur-xl
                       overflow-hidden
+                      hover:border-cyan-400/30
+                      hover:bg-white/10
+                      hover:shadow-[0_0_40px_rgba(34,211,238,.08)]
+                      transition-all
+                      duration-500
                     "
                   >
+
                     {/* Header */}
+
                     <button
                       onClick={() =>
                         setOpenCard(
                           isOpen ? null : index
                         )
                       }
-                      className="
-                        w-full
-                        p-6
-                        flex
-                        justify-between
-                        items-center
-                        text-left
-                      "
+                      className="w-full p-6 flex justify-between items-center text-left"
                     >
                       <div>
-                        <h3 className="text-xl font-bold">
+
+                        <h3 className="text-2xl font-bold">
                           {job.role}
                         </h3>
 
-                        <p className="text-zinc-400 mt-1">
+                        <p className="text-zinc-400 mt-2">
                           {job.company}
                         </p>
 
                         <span
                           className="
-                            inline-block
-                            mt-3
-                            text-xs
-                            bg-white/10
+                            inline-flex
+                            items-center
+                            mt-4
                             px-3
                             py-1
                             rounded-full
+                            border
+                            border-cyan-400/20
+                            bg-cyan-500/10
+                            text-cyan-300
+                            text-xs
                           "
                         >
                           {job.period}
                         </span>
+
                       </div>
 
-                      <div className="text-zinc-400">
-                        {isOpen ? (
-                          <FaChevronUp />
-                        ) : (
-                          <FaChevronDown />
-                        )}
-                      </div>
+                      <FaChevronDown
+                        className={`
+                          text-zinc-400
+                          transition-transform
+                          duration-300
+                          ${isOpen ? "rotate-180" : ""}
+                        `}
+                      />
+
                     </button>
 
-                    {/* Expandable Content */}
-                    <div
-                      className={`
-                        transition-all
-                        duration-500
-                        overflow-hidden
-                        ${
-                          isOpen
-                            ? "max-h-[1000px]"
-                            : "max-h-0"
-                        }
-                      `}
-                    >
-                      <div className="px-6 pb-6">
-                        <ul className="space-y-3 text-zinc-400">
-                          {job.bullets.map(
-                            (bullet, bulletIndex) => (
-                              <li
-                                key={bulletIndex}
-                                className="flex gap-3"
-                              >
-                                <span className="text-white">
-                                  •
-                                </span>
+                    <AnimatePresence>
 
-                                <span>{bullet}</span>
-                              </li>
-                            )
-                          )}
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
+                      {isOpen && (
+
+                        <motion.div
+                          initial={{
+                            height: 0,
+                            opacity: 0,
+                          }}
+                          animate={{
+                            height: "auto",
+                            opacity: 1,
+                          }}
+                          exit={{
+                            height: 0,
+                            opacity: 0,
+                          }}
+                          transition={{
+                            duration: .35,
+                          }}
+                          className="overflow-hidden"
+                        >
+
+                          <div className="px-6 pb-8">
+
+                            <ul className="space-y-4">
+
+                              {job.bullets.map((bullet, i) => (
+
+                                <motion.li
+                                  key={i}
+                                  initial={{
+                                    opacity: 0,
+                                    x: -10,
+                                  }}
+                                  animate={{
+                                    opacity: 1,
+                                    x: 0,
+                                  }}
+                                  transition={{
+                                    delay: i * .05,
+                                  }}
+                                  className="flex gap-4 text-zinc-400 leading-relaxed"
+                                >
+
+                                  <div
+                                    className="
+                                      mt-2
+                                      w-2
+                                      h-2
+                                      rounded-full
+                                      bg-cyan-400
+                                      shadow-[0_0_10px_rgba(34,211,238,.8)]
+                                      flex-shrink-0
+                                    "
+                                  />
+
+                                  <span>
+                                    {bullet}
+                                  </span>
+
+                                </motion.li>
+
+                              ))}
+
+                            </ul>
+
+                          </div>
+
+                        </motion.div>
+
+                      )}
+
+                    </AnimatePresence>
+
+                  </motion.div>
+
                 </div>
+
               </ScrollReveal>
+
             );
+
           })}
+
         </div>
+
       </div>
     </section>
   );
