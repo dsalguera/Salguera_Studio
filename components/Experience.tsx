@@ -76,13 +76,10 @@ export default function Experience() {
   const [openCard, setOpenCard] = useState<number | null>(0);
 
   return (
-    <section
-      id="experience"
-      className="max-w-6xl mx-auto px-6 py-32"
-    >
+    <section id="experience" className="max-w-6xl mx-auto px-6 py-32">
       <ScrollReveal>
         <div className="mb-20">
-          <p className="uppercase tracking-[0.25em] text-cyan-400 text-sm mb-4">
+          <p className="uppercase tracking-[0.25em] text-violet-400 text-sm mb-4">
             CAREER
           </p>
 
@@ -101,19 +98,7 @@ export default function Experience() {
       <div className="relative">
 
         {/* Timeline */}
-        <div
-          className="
-            absolute
-            left-4
-            top-0
-            bottom-0
-            w-[2px]
-            bg-gradient-to-b
-            from-cyan-400/70
-            via-white/10
-            to-purple-500/60
-          "
-        />
+        <div className="absolute left-4 top-0 bottom-0 w-[2px] bg-gradient-to-b from-violet-500/70 via-white/10 to-indigo-500/60" />
 
         <div className="space-y-10">
 
@@ -122,7 +107,6 @@ export default function Experience() {
             const isOpen = openCard === index;
 
             return (
-
               <ScrollReveal key={index}>
 
                 <div className="relative pl-16">
@@ -131,7 +115,7 @@ export default function Experience() {
 
                   <div className="absolute left-0 top-3 flex items-center justify-center w-8 h-8">
 
-                    {/* Soft breathing glow */}
+                    {/* Breathing Glow */}
                     <motion.div
                       animate={{
                         scale: [1, 1.25, 1],
@@ -140,21 +124,13 @@ export default function Experience() {
                       transition={{
                         duration: 2.8,
                         repeat: Infinity,
-                        repeatType: "loop",
                         ease: "easeInOut",
                         delay: index * 0.25,
                       }}
-                      className="
-                        absolute
-                        w-8
-                        h-8
-                        rounded-full
-                        bg-violet-500/30
-                        blur-md
-                      "
+                      className="absolute w-8 h-8 rounded-full bg-violet-500/25 blur-md"
                     />
 
-                    {/* Heartbeat */}
+                    {/* Heartbeat Ring */}
                     <motion.div
                       animate={{
                         scale: [1, 1.15, 1, 1.15, 1],
@@ -162,21 +138,11 @@ export default function Experience() {
                       transition={{
                         duration: 1.8,
                         repeat: Infinity,
-                        repeatType: "loop",
                         ease: "easeInOut",
                         times: [0, .12, .24, .36, 1],
-                        delay: index * 0.18,
+                        delay: index * .18,
                       }}
-                      className="
-                        absolute
-                        w-5
-                        h-5
-                        rounded-full
-                        border
-                        border-violet-400/40
-                        bg-violet-500/10
-                        backdrop-blur-md
-                      "
+                      className="absolute w-5 h-5 rounded-full border border-violet-400/40 bg-violet-500/10 backdrop-blur-md"
                     />
 
                     {/* Core */}
@@ -187,20 +153,11 @@ export default function Experience() {
                       transition={{
                         duration: 1.8,
                         repeat: Infinity,
-                        repeatType: "loop",
                         ease: "easeInOut",
                         times: [0, .12, .24, .36, 1],
-                        delay: index * 0.18,
+                        delay: index * .18,
                       }}
-                      className="
-                        w-3
-                        h-3
-                        rounded-full
-                        bg-gradient-to-br
-                        from-violet-300
-                        to-indigo-500
-                        shadow-[0_0_18px_rgba(139,92,246,.8)]
-                      "
+                      className="w-3 h-3 rounded-full bg-gradient-to-br from-violet-300 to-indigo-500 shadow-[0_0_20px_rgba(139,92,246,.9)]"
                     />
 
                   </div>
@@ -208,37 +165,18 @@ export default function Experience() {
                   {/* Card */}
 
                   <motion.div
-                    whileHover={{
-                      y: -4,
-                    }}
-                    transition={{
-                      duration: .25,
-                    }}
-                    className="
-                      bg-white/5
-                      border
-                      border-white/10
-                      rounded-2xl
-                      backdrop-blur-xl
-                      overflow-hidden
-                      hover:border-cyan-400/30
-                      hover:bg-white/10
-                      hover:shadow-[0_0_40px_rgba(34,211,238,.08)]
-                      transition-all
-                      duration-500
-                    "
+                    whileHover={{ y: -5 }}
+                    transition={{ duration: .25 }}
+                    className="bg-white/5 border border-white/10 rounded-2xl backdrop-blur-xl overflow-hidden transition-all duration-500 hover:bg-white/10 hover:border-violet-400/30 hover:shadow-[0_0_40px_rgba(139,92,246,.12)]"
                   >
 
                     {/* Header */}
 
                     <button
-                      onClick={() =>
-                        setOpenCard(
-                          isOpen ? null : index
-                        )
-                      }
+                      onClick={() => setOpenCard(isOpen ? null : index)}
                       className="w-full p-6 flex justify-between items-center text-left"
                     >
+
                       <div>
 
                         <h3 className="text-2xl font-bold">
@@ -249,57 +187,34 @@ export default function Experience() {
                           {job.company}
                         </p>
 
-                        <span
-                          className="
-                            inline-flex
-                            items-center
-                            mt-4
-                            px-3
-                            py-1
-                            rounded-full
-                            border
-                            border-cyan-400/20
-                            bg-cyan-500/10
-                            text-cyan-300
-                            text-xs
-                          "
-                        >
+                        <span className="inline-flex mt-4 items-center rounded-full border border-violet-400/20 bg-violet-500/10 text-violet-300 px-3 py-1 text-xs">
                           {job.period}
                         </span>
 
                       </div>
 
-                      <FaChevronDown
-                        className={`
-                          text-zinc-400
-                          transition-transform
-                          duration-300
-                          ${isOpen ? "rotate-180" : ""}
-                        `}
-                      />
+                      <motion.div
+                        animate={{
+                          rotate: isOpen ? 180 : 0,
+                        }}
+                        transition={{
+                          duration: .3,
+                        }}
+                      >
+                        <FaChevronDown className="text-zinc-400" />
+                      </motion.div>
 
                     </button>
 
-                    <AnimatePresence>
+                    <AnimatePresence initial={false}>
 
                       {isOpen && (
 
                         <motion.div
-                          initial={{
-                            height: 0,
-                            opacity: 0,
-                          }}
-                          animate={{
-                            height: "auto",
-                            opacity: 1,
-                          }}
-                          exit={{
-                            height: 0,
-                            opacity: 0,
-                          }}
-                          transition={{
-                            duration: .35,
-                          }}
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: .35 }}
                           className="overflow-hidden"
                         >
 
@@ -311,35 +226,28 @@ export default function Experience() {
 
                                 <motion.li
                                   key={i}
-                                  initial={{
-                                    opacity: 0,
-                                    x: -10,
-                                  }}
-                                  animate={{
-                                    opacity: 1,
-                                    x: 0,
-                                  }}
+                                  initial={{ opacity: 0, x: -12 }}
+                                  animate={{ opacity: 1, x: 0 }}
                                   transition={{
                                     delay: i * .05,
                                   }}
                                   className="flex gap-4 text-zinc-400 leading-relaxed"
                                 >
 
-                                  <div
-                                    className="
-                                      mt-2
-                                      w-2
-                                      h-2
-                                      rounded-full
-                                      bg-cyan-400
-                                      shadow-[0_0_10px_rgba(34,211,238,.8)]
-                                      flex-shrink-0
-                                    "
+                                  <motion.div
+                                    animate={{
+                                      scale: [1, 1.4, 1],
+                                      opacity: [.6, 1, .6],
+                                    }}
+                                    transition={{
+                                      duration: 2,
+                                      repeat: Infinity,
+                                      delay: i * .15,
+                                    }}
+                                    className="mt-2 w-2 h-2 rounded-full bg-violet-400 shadow-[0_0_12px_rgba(167,139,250,.9)] flex-shrink-0"
                                   />
 
-                                  <span>
-                                    {bullet}
-                                  </span>
+                                  <span>{bullet}</span>
 
                                 </motion.li>
 
@@ -360,7 +268,6 @@ export default function Experience() {
                 </div>
 
               </ScrollReveal>
-
             );
 
           })}
@@ -368,6 +275,7 @@ export default function Experience() {
         </div>
 
       </div>
+
     </section>
   );
 }
