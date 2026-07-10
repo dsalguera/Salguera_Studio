@@ -6,17 +6,49 @@ import ProjectCard from "@/components/ProjectCard";
 const projects = [
   {
     title: "Laravel + React CRUD",
-    description: "Full-stack system with authentication and API",
-    github: "https://github.com/yourrepo",
-    demo: "https://yourdemo.com",
+    description:
+      "Full-stack CRUD application built with Laravel, React, MySQL, authentication, REST APIs, and responsive UI.",
+
     image: "/projects/project1.png",
+
+    tech: [
+      "Laravel",
+      "React",
+      "MySQL",
+      "REST API",
+    ],
+
+    github: "https://github.com/yourrepo",
+
+    live: "https://yourdemo.com",
+
+    featured: true,
+
+    category: "Full Stack",
   },
+
   {
     title: "CNC Automation Tool",
-    description: "Toolpath optimization for Shapeoko workflows",
-    github: "https://github.com/yourrepo2",
-    demo: "https://yourdemo2.com",
+
+    description:
+      "Workflow automation and toolpath optimization for Shapeoko Pro XXL, Fusion 360, and Laser Tree K30.",
+
     image: "/projects/project2.png",
+
+    tech: [
+      "Fusion 360",
+      "LightBurn",
+      "CNC",
+      "Automation",
+    ],
+
+    github: "https://github.com/yourrepo2",
+
+    live: "https://yourdemo2.com",
+
+    featured: false,
+
+    category: "Automation",
   },
 ];
 
