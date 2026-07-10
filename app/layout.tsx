@@ -2,6 +2,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AnimatedBackground from "@/components/AnimatedBackground";
+import LoadingScreen from "@/components/LoadingScreen";
 
 export const metadata = {
   title: "DSM Studio",
@@ -15,16 +16,21 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-
       <body className="bg-black text-white overflow-x-hidden">
-        {/* Background */}
-        <AnimatedBackground />
-        <Navbar />
+        <LoadingScreen>
+          {/* Background */}
+          <AnimatedBackground />
 
-        {children}
+          {/* Navigation */}
+          <Navbar />
 
+          {/* Pages */}
+          {children}
+
+          {/* Footer */}
+          <Footer />
+        </LoadingScreen>
       </body>
-
     </html>
   );
 }
