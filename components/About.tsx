@@ -53,17 +53,11 @@ const details = [
 
 export default function About() {
   return (
-    <section id="about" className="relative mx-auto max-w-[1500px] px-5 py-24 sm:px-8 sm:py-28 md:px-12 lg:px-16 lg:py-32 xl:px-20">
-      <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20 xl:gap-24">
-        {/* LEFT — STORY */}
-        <motion.div
-          initial={{ opacity: 0, y: 35 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-2xl"
-        >
-          <p className="mb-5 text-xs font-medium uppercase tracking-[0.28em] text-violet-400 sm:text-sm">
+    <section id="about" className="relative mx-auto w-full max-w-[1500px] px-5 py-16 sm:px-8 sm:py-20 md:px-12 lg:px-16 lg:py-24 xl:px-20">
+      <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 xl:gap-20">
+        {/* LEFT */}
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }} className="max-w-2xl">
+          <p className="mb-4 text-xs font-medium uppercase tracking-[0.28em] text-violet-400 sm:text-sm">
             About
           </p>
 
@@ -74,7 +68,7 @@ export default function About() {
             </span>
           </h2>
 
-          <div className="mt-8 space-y-5 text-base leading-8 text-zinc-300 sm:text-lg">
+          <div className="mt-7 space-y-4 text-base leading-8 text-zinc-300 sm:text-lg">
             <p>
               I have been coding since 2017, combining software engineering,
               design, and creative problem-solving to transform ideas into
@@ -84,13 +78,12 @@ export default function About() {
             <p>
               My experience extends beyond software into branding, e-commerce,
               CNC machining, laser engraving, and digital fabrication. This
-              gives me a broader perspective when designing and developing
-              complete solutions.
+              gives me a broader perspective when creating complete solutions.
             </p>
           </div>
 
-          {/* PROFESSIONAL DETAILS */}
-          <div className="mt-10 grid gap-4 border-t border-white/10 pt-7 sm:grid-cols-3">
+          {/* DETAILS */}
+          <div className="mt-8 grid gap-3 border-t border-white/10 pt-6 sm:grid-cols-3">
             {details.map((detail) => (
               <div key={detail.label} className="rounded-2xl border border-white/[0.07] bg-white/[0.03] p-4">
                 <p className="text-lg font-bold text-white sm:text-xl">
@@ -105,39 +98,18 @@ export default function About() {
           </div>
         </motion.div>
 
-        {/* RIGHT — DSM STUDIO PANEL */}
-        <motion.div
-          initial={{ opacity: 0, x: 35, scale: 0.97 }}
-          whileInView={{ opacity: 1, x: 0, scale: 1 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{
-            delay: 0.15,
-            duration: 0.85,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-          className="relative mx-auto w-full max-w-xl lg:mx-0"
-        >
-          <div className="pointer-events-none absolute -inset-8 rounded-full bg-violet-500/[0.08] blur-[75px]" />
+        {/* RIGHT */}
+        <motion.div initial={{ opacity: 0, x: 30, scale: 0.98 }} whileInView={{ opacity: 1, x: 0, scale: 1 }} viewport={{ once: true, amount: 0.15 }} transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }} className="relative mx-auto w-full max-w-xl lg:mx-0">
+          <div className="pointer-events-none absolute -inset-8 rounded-full bg-violet-500/[0.07] blur-[70px]" />
 
-          <motion.div
-            whileHover={{ y: -4, rotateX: 1, rotateY: -1 }}
-            transition={{ duration: 0.3 }}
-            style={{ transformStyle: "preserve-3d" }}
-            className="relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-black/35 p-5 shadow-[0_30px_100px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:rounded-[2rem] sm:p-8"
-          >
+          <motion.div whileHover={{ y: -3, rotateX: 0.75, rotateY: -0.75 }} transition={{ duration: 0.3 }} style={{ transformStyle: "preserve-3d" }} className="relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-black/35 p-5 shadow-[0_30px_100px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:rounded-[2rem] sm:p-8">
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/[0.08] via-transparent to-violet-500/[0.05]" />
 
-            {/* PANEL HEADER */}
-            <div className="relative flex items-center justify-between gap-4 border-b border-white/10 pb-6">
+            {/* HEADER */}
+            <div className="relative flex items-center justify-between gap-4 border-b border-white/10 pb-5">
               <div className="flex min-w-0 items-center gap-4">
                 <div className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.05] p-3 sm:h-14 sm:w-14">
-                  <Image
-                    src="/logo.svg"
-                    alt="DSM Studio logo"
-                    width={36}
-                    height={36}
-                    className="h-8 w-auto sm:h-9"
-                  />
+                  <Image src="/logo.svg" alt="DSM Studio logo" width={36} height={36} className="h-8 w-auto sm:h-9" />
                 </div>
 
                 <div className="min-w-0">
@@ -155,22 +127,12 @@ export default function About() {
             </div>
 
             {/* CAPABILITIES */}
-            <div className="relative mt-6 space-y-3">
-              {capabilities.map((capability, index) => {
+            <div className="relative mt-5 space-y-3">
+              {capabilities.map((capability) => {
                 const Icon = capability.icon;
 
                 return (
-                  <motion.div
-                    key={capability.title}
-                    initial={{ opacity: 0, x: 16 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{
-                      delay: 0.3 + index * 0.1,
-                      duration: 0.5,
-                    }}
-                    className="group flex items-start gap-3 rounded-2xl border border-white/[0.07] bg-white/[0.035] p-3.5 transition duration-300 hover:border-white/15 hover:bg-white/[0.07] sm:gap-4 sm:p-4"
-                  >
+                  <div key={capability.title} className="group flex items-start gap-3 rounded-2xl border border-white/[0.07] bg-white/[0.035] p-3.5 transition duration-300 hover:border-white/15 hover:bg-white/[0.07] sm:gap-4 sm:p-4">
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.05] text-base text-violet-300 transition duration-300 group-hover:text-white sm:h-11 sm:w-11 sm:text-lg">
                       <Icon />
                     </div>
@@ -184,7 +146,7 @@ export default function About() {
                         {capability.description}
                       </p>
                     </div>
-                  </motion.div>
+                  </div>
                 );
               })}
             </div>
