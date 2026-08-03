@@ -14,6 +14,15 @@ export default function LoadingScreen({
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
+    const hasVisited = sessionStorage.getItem("dsm-loader");
+
+    if (hasVisited) {
+      setLoading(false);
+      return;
+    }
+
+    sessionStorage.setItem("dsm-loader", "true");
+
     document.body.style.overflow = "hidden";
 
     const progressInterval = setInterval(() => {
@@ -24,14 +33,23 @@ export default function LoadingScreen({
           setTimeout(() => {
             setLoading(false);
             document.body.style.overflow = "";
-          }, 350);
+          }, 500);
 
           return 100;
         }
 
-        return prev + 2;
+        const increment =
+          prev < 25
+            ? 5
+            : prev < 60
+            ? 3
+            : prev < 85
+            ? 2
+            : 1;
+
+        return Math.min(prev + increment, 100);
       });
-    }, 18);
+    }, 35);
 
     return () => {
       clearInterval(progressInterval);
@@ -64,62 +82,64 @@ export default function LoadingScreen({
 
             <div className="relative z-10 flex w-full max-w-md flex-col items-center px-8">
 
+              {/* Logo */}
+
               <motion.div
-                initial={{ opacity: 0, scale: .9 }}
+                initial={{ opacity: 0, scale: 0.92 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: .7 }}
-                className="text-7xl font-black tracking-tight"
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                className="mb-10"
               >
-                DS
+                <img
+                  src="/logo.svg"
+                  alt="DSM Studio"
+                  className="h-24 w-auto drop-shadow-[0_0_18px_rgba(255,255,255,0.12)]"
+                />
               </motion.div>
 
+              {/* Studio Name */}
+
               <motion.h1
-                initial={{ opacity: 0, y: 12 }}
+                initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: .15 }}
-                className="mt-8 text-lg font-semibold tracking-[0.45em]"
+                transition={{ delay: 0.25, duration: 0.7 }}
+                className="text-3xl font-bold tracking-[0.35em]"
               >
-                SALGUERA STUDIO
+                DSM STUDIO
               </motion.h1>
+
+              {/* Subtitle */}
 
               <motion.p
                 initial={{ opacity: 0 }}
-                animate={{ opacity: .7 }}
-                transition={{ delay: .35 }}
-                className="mt-4 text-sm text-zinc-400"
+                animate={{ opacity: 0.75 }}
+                transition={{ delay: 0.45, duration: 0.6 }}
+                className="mt-4 text-sm uppercase tracking-[0.25em] text-zinc-400"
               >
-                Building Digital Experiences
+                Full Stack Developer
               </motion.p>
 
-              {/* Progress */}
+              {/* Signature Line */}
 
-              <div className="mt-14 w-full overflow-hidden rounded-full bg-white/10">
+              <div className="relative mt-16 h-px w-72 overflow-hidden rounded-full bg-white/10">
 
                 <motion.div
-                  animate={{ width: `${progress}%` }}
-                  transition={{ ease: "easeOut" }}
-                  className="relative h-[4px] rounded-full bg-white"
-                >
+                  initial={{ width: 0 }}
+                  animate={{ width: "100%" }}
+                  transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1], delay: 0.8 }}
+                  className="absolute left-0 top-0 h-full bg-white"
+                />
 
-                  <motion.div
-                    animate={{ x: ["-100%", "300%"] }}
-                    transition={{ duration: 1.1, repeat: Infinity, ease: "linear" }}
-                    className="absolute inset-0 w-20 bg-gradient-to-r from-transparent via-white to-transparent opacity-80"
-                  />
-
-                </motion.div>
+                <motion.div
+                  initial={{ x: "-120%" }}
+                  animate={{ x: "220%" }}
+                  transition={{ delay: 1.4, duration: 0.8, ease: "easeInOut" }}
+                  className="absolute top-0 h-full w-16 bg-gradient-to-r from-transparent via-white to-transparent opacity-90"
+                />
 
               </div>
 
-              <motion.span
-                key={progress}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: .6 }}
-                className="mt-5 text-xs tracking-[0.25em] text-zinc-500"
-              >
-                {progress}%
-              </motion.span>
-                          </div>
+            </div>
 
           </motion.div>
 
