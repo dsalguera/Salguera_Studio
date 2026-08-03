@@ -16,19 +16,19 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-black text-white overflow-x-hidden">
+      <body className="m-0 min-h-screen w-full overflow-x-hidden bg-black text-white">
         <LoadingScreen>
-          {/* Background */}
           <AnimatedBackground />
 
-          {/* Navigation */}
-          <Navbar />
+          <div className="relative z-10 min-h-screen w-full bg-transparent">
+            <Navbar />
 
-          {/* Pages */}
-          {children}
+            <main className="w-full bg-transparent">
+              {children}
+            </main>
 
-          {/* Footer */}
-          <Footer />
+            <Footer />
+          </div>
         </LoadingScreen>
       </body>
     </html>
