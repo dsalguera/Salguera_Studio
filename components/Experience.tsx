@@ -1,281 +1,351 @@
 "use client";
 
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { FaChevronDown } from "react-icons/fa";
-import ScrollReveal from "./ScrollReveal";
+import { motion } from "framer-motion";
+import {
+  FaArrowRight,
+  FaBriefcase,
+  FaCalendarDays,
+  FaLocationDot,
+} from "react-icons/fa6";
 
-const experience = [
+type ExperienceItem = {
+  role: string;
+  company: string;
+  period: string;
+  location: string;
+  summary: string;
+  highlights: string[];
+  skills: string[];
+};
+
+const experience: ExperienceItem[] = [
   {
     role: "Graphic Designer & Ecommerce Specialist",
     company: "Printaway Orlando",
-    period: "Apr 2025 - Present",
-    bullets: [
-      "Designed and created engaging visual content for e-commerce platforms, including product images, banners, and marketing materials.",
-      "Oversaw management of Amazon, Etsy, eBay, and other e-commerce platforms.",
-      "Collaborated on email campaigns, social media content, and digital advertisements.",
-      "Performed website updates, product uploads, pricing adjustments, and SEO optimization.",
-      "Analyzed traffic and sales data to improve customer experience and increase sales.",
-      "Managed inventory and maintained consistency across online channels.",
-      "Supported promotional campaigns and product launches.",
-      "Maintained organized workflows to meet project deadlines.",
+    period: "Apr 2025 — Present",
+    location: "Orlando, Florida",
+    summary:
+      "Managing visual content, product listings, and digital storefront operations across multiple e-commerce platforms.",
+    highlights: [
+      "Create product imagery, banners, advertisements, and promotional assets.",
+      "Manage products, pricing, inventory, and digital storefront content.",
+      "Support SEO, email campaigns, product launches, and sales optimization.",
+    ],
+    skills: [
+      "Graphic Design",
+      "E-commerce",
+      "SEO",
+      "Product Management",
     ],
   },
   {
     role: "Graphic Designer & Office Coordinator",
     company: "AdventHealth Central Florida",
-    period: "May 2024 - Feb 2025",
-    bullets: [
-      "Managed and tracked printing orders from initial request to final delivery.",
-      "Reviewed design quality before production.",
-      "Provided customer support via phone and email.",
-      "Coordinated vendors and production teams.",
-      "Maintained client records and inventory.",
-      "Created marketing materials and promotional graphics.",
+    period: "May 2024 — Feb 2025",
+    location: "Central Florida",
+    summary:
+      "Coordinated print production, customer communication, design quality, and operational workflows.",
+    highlights: [
+      "Managed printing orders from request through final delivery.",
+      "Reviewed artwork and production files before printing.",
+      "Coordinated customers, vendors, inventory, and production teams.",
+    ],
+    skills: [
+      "Print Production",
+      "Customer Support",
+      "Quality Control",
+      "Coordination",
     ],
   },
   {
     role: "Computer & Server Technician",
     company: "MKB Technology",
-    period: "Feb 2024 - May 2024",
-    bullets: [
-      "Installed and tested server hardware including CPUs, RAM, RAID controllers, and power supplies.",
-      "Deployed Windows Server and Linux systems.",
-      "Performed stress testing and benchmarking.",
-      "Configured networking, VLANs, and security policies.",
-      "Documented troubleshooting procedures and test results.",
+    period: "Feb 2024 — May 2024",
+    location: "Orlando, Florida",
+    summary:
+      "Built, tested, configured, and documented computer and server systems for production use.",
+    highlights: [
+      "Installed server hardware, CPUs, RAM, RAID controllers, and power supplies.",
+      "Deployed and tested Windows Server and Linux environments.",
+      "Configured networking, VLANs, security policies, and benchmarks.",
+    ],
+    skills: [
+      "Server Hardware",
+      "Linux",
+      "Networking",
+      "Troubleshooting",
     ],
   },
   {
     role: "Graphic Designer & Web Developer",
     company: "Pixels Santa Cruz",
-    period: "2017 - 2022",
-    bullets: [
-      "Developed responsive websites using HTML, CSS, JavaScript, and related technologies.",
-      "Collaborated with teams to translate business requirements into web solutions.",
-      "Conducted testing and debugging.",
-      "Implemented CMS and e-commerce solutions.",
-      "Stayed current with web development trends and best practices.",
-      "Participated in code reviews and quality improvements.",
+    period: "2017 — 2022",
+    location: "Nicaragua",
+    summary:
+      "Designed visual identities and developed responsive websites for businesses and digital projects.",
+    highlights: [
+      "Developed responsive websites using HTML, CSS, and JavaScript.",
+      "Created branding, marketing materials, and digital content.",
+      "Implemented CMS and e-commerce solutions for business clients.",
+    ],
+    skills: [
+      "Web Development",
+      "Branding",
+      "UI Design",
+      "E-commerce",
     ],
   },
   {
     role: "Customer Service Representative",
     company: "IBEX Global",
-    period: "May 2019 - Mar 2020",
-    bullets: [
-      "Provided customer support through phone, email, and chat.",
-      "Resolved billing and account issues.",
-      "Maintained customer satisfaction metrics.",
-      "Documented interactions and follow-up actions.",
+    period: "May 2019 — Mar 2020",
+    location: "Nicaragua",
+    summary:
+      "Supported customers across phone, email, and chat while resolving account and billing concerns.",
+    highlights: [
+      "Resolved billing, account, and service-related issues.",
+      "Maintained customer satisfaction and performance standards.",
+      "Documented interactions, solutions, and follow-up actions.",
+    ],
+    skills: [
+      "Customer Support",
+      "Communication",
+      "Problem Solving",
+      "Documentation",
     ],
   },
 ];
 
 export default function Experience() {
-  const [openCard, setOpenCard] = useState<number | null>(0);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeExperience = experience[activeIndex];
 
   return (
-    <section id="experience" className="max-w-6xl mx-auto px-6 py-32">
-      <ScrollReveal>
-        <div className="mb-20">
-          <p className="uppercase tracking-[0.25em] text-violet-400 text-sm mb-4">
-            CAREER
+    <section
+      id="experience"
+      className="relative w-full py-16 sm:py-20 lg:py-24"
+    >
+      <div className="mx-auto w-full max-w-[1500px] px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+        {/* Heading */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{
+            duration: 0.65,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+          className="max-w-3xl"
+        >
+          <p className="mb-4 text-sm font-medium uppercase tracking-[0.3em] text-violet-400">
+            Experience
           </p>
 
-          <h2 className="text-5xl font-black">
-            Work Experience
+          <h2 className="text-3xl font-black tracking-[-0.035em] text-white sm:text-4xl md:text-5xl">
+            Work shaped by
+            <span className="block bg-gradient-to-r from-violet-300 via-fuchsia-300 to-indigo-300 bg-clip-text text-transparent">
+              technology and design.
+            </span>
           </h2>
 
-          <p className="text-zinc-400 mt-4 max-w-2xl leading-relaxed">
-            A journey through graphic design, software development,
-            IT infrastructure, and e-commerce—building solutions that
-            combine creativity with technology.
+          <p className="mt-5 max-w-2xl text-base leading-7 text-zinc-300 sm:text-lg sm:leading-8">
+            A multidisciplinary background spanning software, design,
+            e-commerce, technical systems, and customer experience.
           </p>
-        </div>
-      </ScrollReveal>
+        </motion.div>
 
-      <div className="relative">
-
-        {/* Timeline */}
-        <div className="absolute left-4 top-0 bottom-0 w-[2px] bg-gradient-to-b from-violet-500/70 via-white/10 to-indigo-500/60" />
-
-        <div className="space-y-10">
-
+        {/* Mobile role selector */}
+        <div className="mt-10 grid grid-cols-1 gap-2 min-[480px]:grid-cols-2 lg:hidden">
           {experience.map((job, index) => {
-
-            const isOpen = openCard === index;
+            const active = activeIndex === index;
 
             return (
-              <ScrollReveal key={index}>
+              <button
+                key={`${job.company}-${job.period}`}
+                type="button"
+                onClick={() => setActiveIndex(index)}
+                aria-pressed={active}
+                className={`group relative rounded-2xl border p-4 text-left transition-all duration-300 ${
+                  active
+                    ? "border-violet-400/40 bg-violet-400/[0.09] shadow-[0_10px_35px_rgba(139,92,246,0.08)]"
+                    : "border-white/[0.08] bg-white/[0.025] hover:border-white/15 hover:bg-white/[0.05]"
+                }`}
+              >
+                <div className="flex items-start gap-3">
+                  <span
+                    className={`mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full transition-all duration-300 ${
+                      active
+                        ? "bg-violet-400 shadow-[0_0_14px_rgba(167,139,250,0.75)]"
+                        : "bg-zinc-700 group-hover:bg-zinc-500"
+                    }`}
+                  />
 
-                <div className="relative pl-16">
-
-                  {/* Timeline Dot */}
-
-                  <div className="absolute left-0 top-3 flex items-center justify-center w-8 h-8">
-
-                    {/* Ambient Glow */}
-                    <motion.div
-                      animate={{
-                        scale: [1, 1.25, 1],
-                        opacity: [0.15, 0.35, 0.15],
-                      }}
-                      transition={{
-                        duration: 2.8,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: index * 0.25,
-                      }}
-                      className="absolute w-8 h-8 rounded-full bg-violet-500/25 blur-md"
-                    />
-
-                    {/* White Heartbeat Ring */}
-                    <motion.div
-                      animate={{
-                        scale: [1, 1.15, 1, 1.15, 1],
-                      }}
-                      transition={{
-                        duration: 1.8,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        times: [0, 0.12, 0.24, 0.36, 1],
-                        delay: index * 0.18,
-                      }}
-                      className="absolute w-5 h-5 rounded-full border border-white/70 bg-white/5 backdrop-blur-md"
-                    />
-
-                    {/* Purple Core */}
-                    <motion.div
-                      animate={{
-                        scale: [1, 1.3, 1, 1.3, 1],
-                      }}
-                      transition={{
-                        duration: 1.8,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        times: [0, 0.12, 0.24, 0.36, 1],
-                        delay: index * 0.18,
-                      }}
-                      className="w-3 h-3 rounded-full bg-gradient-to-br from-violet-300 via-violet-400 to-indigo-500 shadow-[0_0_18px_rgba(139,92,246,.85)]"
-                    />
-
-                  </div>
-
-                  {/* Card */}
-
-                  <motion.div
-                    whileHover={{ y: -5 }}
-                    transition={{ duration: .25 }}
-                    className="bg-white/5 border border-white/10 rounded-2xl backdrop-blur-xl overflow-hidden transition-all duration-500 hover:bg-white/10 hover:border-violet-400/30 hover:shadow-[0_0_40px_rgba(139,92,246,.12)]"
-                  >
-
-                    {/* Header */}
-
-                    <button
-                      onClick={() => setOpenCard(isOpen ? null : index)}
-                      className="w-full p-6 flex justify-between items-center text-left"
+                  <div className="min-w-0">
+                    <p
+                      className={`text-sm font-semibold transition-colors duration-300 ${
+                        active ? "text-white" : "text-zinc-300"
+                      }`}
                     >
+                      {job.company}
+                    </p>
 
-                      <div>
+                    <p className="mt-1 line-clamp-2 text-xs leading-5 text-zinc-400">
+                      {job.role}
+                    </p>
 
-                        <h3 className="text-2xl font-bold">
-                          {job.role}
-                        </h3>
+                    <span className="mt-2 inline-flex whitespace-nowrap rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.12em] text-zinc-400">
+                      {job.period}
+                    </span>
+                  </div>
+                </div>
+              </button>
+            );
+          })}
+        </div>
 
-                        <p className="text-zinc-400 mt-2">
+        {/* Experience interface */}
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{
+            delay: 0.1,
+            duration: 0.7,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+          className="mt-5 grid overflow-hidden rounded-[1.75rem] border border-white/10 bg-black/25 shadow-[0_30px_100px_rgba(0,0,0,0.35)] lg:mt-12 lg:grid-cols-[0.8fr_1.2fr]"
+        >
+          {/* Desktop role navigation */}
+          <div className="hidden border-r border-white/10 bg-white/[0.025] p-4 lg:block">
+            <div className="space-y-2">
+              {experience.map((job, index) => {
+                const active = activeIndex === index;
+
+                return (
+                  <button
+                    key={`${job.company}-${job.period}`}
+                    type="button"
+                    onClick={() => setActiveIndex(index)}
+                    aria-pressed={active}
+                    className={`group relative w-full rounded-2xl border p-4 text-left transition-all duration-300 ${
+                      active
+                        ? "border-white/15 bg-white/[0.09]"
+                        : "border-transparent bg-transparent hover:border-white/[0.07] hover:bg-white/[0.04]"
+                    }`}
+                  >
+                    <div className="flex items-start gap-3">
+                      <span
+                        className={`mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full transition-all duration-300 ${
+                          active
+                            ? "bg-violet-400 shadow-[0_0_14px_rgba(167,139,250,0.75)]"
+                            : "bg-zinc-700 group-hover:bg-zinc-500"
+                        }`}
+                      />
+
+                      <div className="min-w-0">
+                        <p
+                          className={`truncate text-sm font-semibold transition-colors duration-300 ${
+                            active ? "text-white" : "text-zinc-300"
+                          }`}
+                        >
                           {job.company}
                         </p>
 
-                        <span className="inline-flex mt-4 items-center rounded-full border border-violet-400/20 bg-violet-500/10 text-violet-300 px-3 py-1 text-xs">
+                        <p className="mt-1 line-clamp-2 text-xs leading-5 text-zinc-400">
+                          {job.role}
+                        </p>
+
+                        <span className="mt-2 inline-flex whitespace-nowrap rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.12em] text-zinc-400">
                           {job.period}
                         </span>
-
                       </div>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+                    {/* Active role */}
+          <div className="relative p-5 sm:p-7 lg:min-h-[500px] lg:p-10">
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/[0.045] via-transparent to-violet-500/[0.035]" />
 
-                      <motion.div
-                        animate={{
-                          rotate: isOpen ? 180 : 0,
-                        }}
-                        transition={{
-                          duration: .3,
-                        }}
-                      >
-                        <FaChevronDown className="text-zinc-400" />
-                      </motion.div>
+            <motion.div
+              key={`${activeExperience.company}-${activeExperience.role}`}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.35,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="relative"
+            >
+              {/* Header */}
+              <div className="flex flex-col gap-5 border-b border-white/10 pb-6 sm:flex-row sm:items-start sm:justify-between">
+                <div>
+                  <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.05] text-violet-300">
+                    <FaBriefcase />
+                  </div>
 
-                    </button>
+                  <h3 className="max-w-2xl text-2xl font-bold leading-tight text-white sm:text-3xl">
+                    {activeExperience.role}
+                  </h3>
 
-                    <AnimatePresence initial={false}>
-
-                      {isOpen && (
-
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: .35 }}
-                          className="overflow-hidden"
-                        >
-
-                          <div className="px-6 pb-8">
-
-                            <ul className="space-y-4">
-
-                              {job.bullets.map((bullet, i) => (
-
-                                <motion.li
-                                  key={i}
-                                  initial={{ opacity: 0, x: -12 }}
-                                  animate={{ opacity: 1, x: 0 }}
-                                  transition={{
-                                    delay: i * .05,
-                                  }}
-                                  className="flex gap-4 text-zinc-400 leading-relaxed"
-                                >
-
-                                  <motion.div
-                                    animate={{
-                                      scale: [1, 1.4, 1],
-                                      opacity: [.6, 1, .6],
-                                    }}
-                                    transition={{
-                                      duration: 2,
-                                      repeat: Infinity,
-                                      delay: i * .15,
-                                    }}
-                                    className="mt-2 w-2 h-2 rounded-full bg-violet-400 shadow-[0_0_12px_rgba(167,139,250,.9)] flex-shrink-0"
-                                  />
-
-                                  <span>{bullet}</span>
-
-                                </motion.li>
-
-                              ))}
-
-                            </ul>
-
-                          </div>
-
-                        </motion.div>
-
-                      )}
-
-                    </AnimatePresence>
-
-                  </motion.div>
-
+                  <p className="mt-2 text-base font-medium text-violet-300">
+                    {activeExperience.company}
+                  </p>
                 </div>
 
-              </ScrollReveal>
-            );
+                <div className="flex flex-col gap-2 text-sm text-zinc-400 sm:items-end">
+                  <span className="flex items-center gap-2 whitespace-nowrap">
+                    <FaCalendarDays className="shrink-0 text-zinc-300" />
+                    {activeExperience.period}
+                  </span>
 
-          })}
+                  <span className="flex items-center gap-2">
+                    <FaLocationDot className="shrink-0 text-zinc-300" />
+                    {activeExperience.location}
+                  </span>
+                </div>
+              </div>
 
-        </div>
+              {/* Summary */}
+              <p className="mt-6 max-w-3xl text-base leading-7 text-zinc-300 sm:text-lg sm:leading-8">
+                {activeExperience.summary}
+              </p>
 
+              {/* Highlights */}
+              <div className="mt-7 space-y-3">
+                {activeExperience.highlights.map((highlight) => (
+                  <div
+                    key={highlight}
+                    className="flex items-start gap-3 rounded-2xl border border-white/[0.07] bg-white/[0.035] p-4"
+                  >
+                    <FaArrowRight className="mt-1 shrink-0 text-sm text-violet-300" />
+
+                    <p className="text-sm leading-6 text-zinc-300 sm:text-base">
+                      {highlight}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Skills */}
+              <div className="mt-7 flex flex-wrap gap-2">
+                {activeExperience.skills.map((skill) => (
+                  <span
+                    key={skill}
+                    className="rounded-full border border-white/10 bg-white/[0.045] px-4 py-2 text-xs font-medium text-zinc-300"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
       </div>
-
     </section>
   );
 }
+          
