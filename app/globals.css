@@ -51,24 +51,24 @@ html[data-theme="light"] {
   --font-mono: monospace;
 }
 
-html {
+html,
+body {
   width: 100%;
   max-width: 100%;
   min-height: 100%;
   margin: 0;
+  padding: 0;
   overflow-x: hidden;
-  scroll-behavior: smooth;
+  overflow-x: clip;
   background: var(--page-background);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   position: relative;
-  width: 100%;
-  max-width: 100%;
-  min-height: 100%;
-  margin: 0;
-  overflow-x: hidden;
-  background: var(--page-background);
   color: var(--page-foreground);
   font-family: Arial,Helvetica,sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -76,14 +76,41 @@ body {
   transition: background-color 350ms ease,color 350ms ease;
 }
 
-*,*::before,*::after { box-sizing: border-box; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
-img,svg,video,canvas {
+main,
+header,
+nav,
+footer,
+section,
+article,
+aside {
+  width: 100%;
+  max-width: 100%;
+}
+
+img,
+svg,
+video,
+canvas {
   display: block;
   max-width: 100%;
 }
 
-button,input,textarea,select { font: inherit; }
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  margin: 0;
+}
 
 ::selection {
   background: var(--accent-1);
@@ -97,10 +124,10 @@ button,input,textarea,select { font: inherit; }
 .accent-text { color: var(--accent-1); }
 
 .accent-gradient-text {
+  color: transparent;
   background-image: linear-gradient(90deg,var(--accent-1),var(--accent-2),var(--accent-3));
   background-clip: text;
   -webkit-background-clip: text;
-  color: transparent;
 }
 
 .theme-surface {
@@ -209,7 +236,9 @@ html[data-theme="light"] .theme-primary-button {
   box-shadow: 0 10px 35px rgba(var(--accent-rgb),0.18);
 }
 
-.theme-primary-button:hover { transform: scale(1.02); }
+.theme-primary-button:hover {
+  transform: scale(1.02);
+}
 
 .theme-secondary-button {
   color: var(--text-primary);
@@ -249,7 +278,9 @@ html[data-theme="light"] .theme-toggle {
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.75),0 12px 35px rgba(24,24,27,0.07);
 }
 
-.theme-toggle-option { color: var(--text-muted); }
+.theme-toggle-option {
+  color: var(--text-muted);
+}
 
 .theme-toggle-option-active {
   color: var(--text-primary);
@@ -277,7 +308,9 @@ html[data-theme="light"] .theme-glow-secondary {
   background: radial-gradient(circle,rgba(var(--accent-rgb-secondary),0.1) 0%,rgba(var(--accent-rgb-secondary),0.04) 42%,transparent 74%);
 }
 
-.navbar-logo { filter: none; }
+.navbar-logo {
+  filter: none;
+}
 
 html[data-theme="light"] .navbar-logo {
   filter: brightness(0) saturate(100%);
@@ -313,18 +346,60 @@ html[data-theme="light"] .navbar-logo {
   will-change: transform;
 }
 
+.mobile-menu-shell {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  width: 100vw;
+  max-width: 100vw;
+  overflow: hidden;
+}
+
+.mobile-menu-position {
+  position: absolute;
+  top: calc(4.75rem + env(safe-area-inset-top));
+  left: 0;
+  right: 0;
+  width: 100%;
+  padding-left: max(12px,env(safe-area-inset-left));
+  padding-right: max(12px,env(safe-area-inset-right));
+}
+
+.mobile-menu-card {
+  width: 100%;
+  max-width: 448px;
+  max-height: calc(100dvh - 6rem - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+  margin: 0 auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
 @media (max-width: 767px) {
-  .background-float-one,.background-float-two,.background-float-three { animation: none; }
-  .theme-card,.theme-item,.theme-surface,.theme-secondary-button,.theme-toggle {
+  .background-float-one,
+  .background-float-two,
+  .background-float-three {
+    animation: none;
+  }
+
+  .theme-card,
+  .theme-item,
+  .theme-surface,
+  .theme-secondary-button,
+  .theme-toggle {
     backdrop-filter: blur(12px) saturate(120%);
     -webkit-backdrop-filter: blur(12px) saturate(120%);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
+  html {
+    scroll-behavior: auto;
+  }
 
-  *,*::before,*::after {
+  *,
+  *::before,
+  *::after {
     scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;

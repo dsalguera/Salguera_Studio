@@ -43,9 +43,7 @@ export default function Navbar() {
 
   useEffect(() => {
     setMenuOpen(false);
-    window.requestAnimationFrame(() => {
-      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-    });
+    window.requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0, behavior: "auto" }));
   }, [pathname]);
 
   useEffect(() => {
@@ -53,123 +51,71 @@ export default function Navbar() {
 
     const html = document.documentElement;
     const body = document.body;
-    const oldHtmlOverflow = html.style.overflow;
-    const oldBodyOverflow = body.style.overflow;
+    const previousHtmlOverflow = html.style.overflow;
+    const previousBodyOverflow = body.style.overflow;
 
     html.style.overflow = "hidden";
     body.style.overflow = "hidden";
 
     return () => {
-      html.style.overflow = oldHtmlOverflow;
-      body.style.overflow = oldBodyOverflow;
+      html.style.overflow = previousHtmlOverflow;
+      body.style.overflow = previousBodyOverflow;
     };
   }, [menuOpen]);
 
   const toggleTheme = () => {
-    const newTheme: ThemeName = theme === "dark" ? "light" : "dark";
-    setTheme(newTheme);
-    document.documentElement.dataset.theme = newTheme;
-    localStorage.setItem("dsm-theme", newTheme);
+    const nextTheme: ThemeName = theme === "dark" ? "light" : "dark";
+    setTheme(nextTheme);
+    document.documentElement.dataset.theme = nextTheme;
+    localStorage.setItem("dsm-theme", nextTheme);
   };
-
-  const closeMenu = () => setMenuOpen(false);
 
   const handleNavigation = () => {
     setMenuOpen(false);
-    window.requestAnimationFrame(() => {
-      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-    });
+    window.requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0, behavior: "auto" }));
   };
 
-  const themeIcon =
-    themeReady && theme === "dark" ? <FaSun className="block" /> : <FaMoon className="block" />;
+  const themeIcon = themeReady && theme === "dark" ? <FaSun /> : <FaMoon />;
 
   const mobileMenu =
     mounted &&
     createPortal(
       <AnimatePresence>
         {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[9999] overflow-hidden lg:hidden"
-          >
-            <button
-              type="button"
-              aria-label="Close navigation menu"
-              onClick={closeMenu}
-              className="absolute inset-0 h-full w-full bg-black/40 backdrop-blur-sm"
-            />
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="mobile-menu-shell lg:hidden">
+            <button type="button" aria-label="Close navigation menu" onClick={() => setMenuOpen(false)} className="absolute inset-0 h-full w-full bg-black/40 backdrop-blur-sm" />
 
-            <motion.div
-              initial={{ opacity: 0, y: -12, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -12, scale: 0.98 }}
-              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-              className="theme-card absolute left-3 right-3 top-[calc(4.75rem+env(safe-area-inset-top))] mx-auto w-auto max-w-md overflow-hidden rounded-[1.5rem] border p-3 sm:left-6 sm:right-6 sm:p-4"
-              style={{
-                maxWidth: "calc(100vw - 24px)",
-                maxHeight:
-                  "calc(100dvh - 6rem - env(safe-area-inset-top) - env(safe-area-inset-bottom))",
-              }}
-            >
-              <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.05),transparent_55%,rgba(var(--accent-rgb),0.05))]" />
+            <div className="mobile-menu-position">
+              <motion.div initial={{ opacity: 0, y: -12, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -12, scale: 0.98 }} transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }} className="theme-card mobile-menu-card rounded-[1.5rem] border p-3">
+                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.05),transparent_55%,rgba(var(--accent-rgb),0.05))]" />
 
-              <div className="relative max-h-[calc(100dvh-8rem-env(safe-area-inset-top)-env(safe-area-inset-bottom))] overflow-y-auto overflow-x-hidden overscroll-contain">
-                <div className="space-y-2">
+                <div className="relative space-y-2">
                   {links.map((link, index) => {
                     const active = pathname === link.href;
 
                     return (
-                      <motion.div
-                        key={link.href}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.04 + index * 0.05 }}
-                      >
-                        <Link
-                          href={link.href}
-                          scroll
-                          onClick={handleNavigation}
-                          className={`group flex w-full items-center justify-between rounded-2xl border px-4 py-3.5 text-sm font-medium transition duration-300 ${
-                            active
-                              ? "border-[rgba(var(--accent-rgb),0.4)] bg-[rgba(var(--accent-rgb),0.1)] text-[var(--text-primary)]"
-                              : "theme-item theme-text-secondary"
-                          }`}
-                        >
+                      <motion.div key={link.href} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.04 + index * 0.05 }}>
+                        <Link href={link.href} scroll onClick={handleNavigation} className={`group flex w-full items-center justify-between rounded-2xl border px-4 py-3.5 text-sm font-medium transition duration-300 ${active ? "border-[rgba(var(--accent-rgb),0.4)] bg-[rgba(var(--accent-rgb),0.1)] text-[var(--text-primary)]" : "theme-item theme-text-secondary"}`}>
                           <span>{link.label}</span>
-
-                          <span
-                            className={`h-2 w-2 shrink-0 rounded-full ${
-                              active
-                                ? "bg-[var(--accent-1)] shadow-[0_0_12px_rgba(var(--accent-rgb),0.75)]"
-                                : "bg-[var(--text-subtle)] opacity-40"
-                            }`}
-                          />
+                          <span className={`h-2 w-2 shrink-0 rounded-full ${active ? "bg-[var(--accent-1)] shadow-[0_0_12px_rgba(var(--accent-rgb),0.75)]" : "bg-[var(--text-subtle)] opacity-40"}`} />
                         </Link>
                       </motion.div>
                     );
                   })}
                 </div>
 
-                <div className="mt-3 border-t border-[var(--border)] pt-3">
-                  <Link
-                    href="/contact"
-                    scroll
-                    onClick={handleNavigation}
-                    className="theme-primary-button group flex w-full items-center justify-center gap-3 rounded-full px-5 py-3.5 text-sm font-semibold"
-                  >
+                <div className="relative mt-3 border-t border-[var(--border)] pt-3">
+                  <Link href="/contact" scroll onClick={handleNavigation} className="theme-primary-button group flex w-full items-center justify-center gap-3 rounded-full px-5 py-3.5 text-sm font-semibold">
                     Let&apos;s Talk
                     <FaArrowRight className="text-xs transition-transform group-hover:translate-x-1" />
                   </Link>
                 </div>
 
-                <p className="theme-text-subtle mt-3 pb-[max(0.25rem,env(safe-area-inset-bottom))] text-center text-[9px] uppercase tracking-[0.18em]">
+                <p className="theme-text-subtle relative mt-3 pb-[max(0.25rem,env(safe-area-inset-bottom))] text-center text-[9px] uppercase tracking-[0.18em]">
                   Software · Design · Fabrication
                 </p>
-              </div>
-            </motion.div>
+              </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>,
@@ -178,34 +124,11 @@ export default function Navbar() {
 
   return (
     <>
-      <nav
-        className={`fixed inset-x-0 top-0 z-50 w-full max-w-full overflow-hidden border-b transition-all duration-500 ${
-          scrolled || menuOpen
-            ? "border-[var(--border)] bg-[color:var(--surface-strong)] shadow-[0_12px_45px_var(--shadow-color)] backdrop-blur-2xl"
-            : "border-transparent bg-transparent"
-        }`}
-      >
-        <div
-          className={`mx-auto grid w-full max-w-[1500px] grid-cols-[1fr_auto] items-center gap-2 pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] transition-all duration-500 sm:gap-3 sm:px-8 lg:grid-cols-3 lg:px-16 xl:px-20 ${
-            scrolled ? "h-16" : "h-20"
-          }`}
-        >
+      <nav className={`fixed inset-x-0 top-0 z-50 w-full max-w-full overflow-hidden border-b transition-all duration-500 ${scrolled || menuOpen ? "border-[var(--border)] bg-[color:var(--surface-strong)] shadow-[0_12px_45px_var(--shadow-color)] backdrop-blur-2xl" : "border-transparent bg-transparent"}`}>
+        <div className={`mx-auto grid w-full max-w-[1500px] grid-cols-[1fr_auto] items-center gap-2 px-4 transition-all duration-500 sm:px-8 lg:grid-cols-3 lg:px-16 xl:px-20 ${scrolled ? "h-16" : "h-20"}`}>
           <div className="flex min-w-0 justify-start">
-            <Link
-              href="/"
-              scroll
-              onClick={handleNavigation}
-              aria-label="Go to homepage"
-              className="theme-surface group relative grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-xl border transition duration-300 hover:scale-105 sm:h-11 sm:w-11 sm:rounded-2xl"
-            >
-              <Image
-                src="/logo.svg"
-                alt="DSM Studio logo"
-                width={30}
-                height={30}
-                priority
-                className="navbar-logo block h-6 w-auto sm:h-7"
-              />
+            <Link href="/" scroll onClick={handleNavigation} aria-label="Go to homepage" className="theme-surface group relative grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-xl border transition duration-300 hover:scale-105 sm:h-11 sm:w-11 sm:rounded-2xl">
+              <Image src="/logo.svg" alt="DSM Studio logo" width={30} height={30} priority className="navbar-logo block h-6 w-auto sm:h-7" />
             </Link>
           </div>
 
@@ -214,117 +137,47 @@ export default function Navbar() {
               const active = pathname === link.href;
 
               return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  scroll
-                  onClick={handleNavigation}
-                  className="group relative py-2 text-sm font-medium tracking-wide"
-                >
-                  <span
-                    className={
-                      active
-                        ? "theme-text"
-                        : "theme-text-muted transition-colors group-hover:text-[var(--text-primary)]"
-                    }
-                  >
-                    {link.label}
-                  </span>
-
-                  <span
-                    className={`absolute bottom-0 left-1/2 h-px -translate-x-1/2 bg-[var(--accent-1)] transition-all duration-300 ${
-                      active
-                        ? "w-full opacity-100"
-                        : "w-0 opacity-0 group-hover:w-full group-hover:opacity-100"
-                    }`}
-                  />
+                <Link key={link.href} href={link.href} scroll onClick={handleNavigation} className="group relative py-2 text-sm font-medium tracking-wide">
+                  <span className={active ? "theme-text" : "theme-text-muted transition-colors group-hover:text-[var(--text-primary)]"}>{link.label}</span>
+                  <span className={`absolute bottom-0 left-1/2 h-px -translate-x-1/2 bg-[var(--accent-1)] transition-all duration-300 ${active ? "w-full opacity-100" : "w-0 opacity-0 group-hover:w-full group-hover:opacity-100"}`} />
                 </Link>
               );
             })}
           </div>
 
           <div className="hidden items-center justify-end gap-3 lg:flex">
-            <button
-              type="button"
-              onClick={toggleTheme}
-              aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-              className="theme-surface theme-text-secondary grid h-11 w-11 shrink-0 place-items-center rounded-full border"
-            >
+            <button type="button" onClick={toggleTheme} aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"} className="theme-surface theme-text-secondary grid h-11 w-11 shrink-0 place-items-center rounded-full border">
               <AnimatePresence mode="wait" initial={false}>
-                <motion.span
-                  key={theme}
-                  initial={{ opacity: 0, rotate: -60, scale: 0.8 }}
-                  animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                  exit={{ opacity: 0, rotate: 60, scale: 0.8 }}
-                  transition={{ duration: 0.2 }}
-                  className="grid h-full w-full place-items-center"
-                >
+                <motion.span key={theme} initial={{ opacity: 0, rotate: -60, scale: 0.8 }} animate={{ opacity: 1, rotate: 0, scale: 1 }} exit={{ opacity: 0, rotate: 60, scale: 0.8 }} transition={{ duration: 0.2 }} className="grid h-full w-full place-items-center">
                   {themeIcon}
                 </motion.span>
               </AnimatePresence>
             </button>
 
-            <Link
-              href="/contact"
-              scroll
-              onClick={handleNavigation}
-              className="theme-secondary-button group inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-medium"
-            >
+            <Link href="/contact" scroll onClick={handleNavigation} className="theme-secondary-button group inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-medium">
               Let&apos;s Talk
               <FaArrowRight className="accent-text text-xs transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
 
           <div className="flex shrink-0 items-center justify-end gap-2 lg:hidden">
-            <button
-              type="button"
-              onClick={toggleTheme}
-              aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-              className="theme-surface theme-text-secondary grid h-10 w-10 shrink-0 place-items-center rounded-full border text-sm"
-            >
+            <button type="button" onClick={toggleTheme} aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"} className="theme-surface theme-text-secondary grid h-10 w-10 shrink-0 place-items-center rounded-full border text-sm">
               <AnimatePresence mode="wait" initial={false}>
-                <motion.span
-                  key={theme}
-                  initial={{ opacity: 0, rotate: -60, scale: 0.8 }}
-                  animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                  exit={{ opacity: 0, rotate: 60, scale: 0.8 }}
-                  transition={{ duration: 0.2 }}
-                  className="grid h-full w-full place-items-center"
-                >
+                <motion.span key={theme} initial={{ opacity: 0, rotate: -60, scale: 0.8 }} animate={{ opacity: 1, rotate: 0, scale: 1 }} exit={{ opacity: 0, rotate: 60, scale: 0.8 }} transition={{ duration: 0.2 }} className="grid h-full w-full place-items-center">
                   {themeIcon}
                 </motion.span>
               </AnimatePresence>
             </button>
 
-            <button
-              type="button"
-              onClick={() => setMenuOpen((current) => !current)}
-              aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
-              aria-expanded={menuOpen}
-              className="theme-surface theme-text grid h-10 w-10 shrink-0 place-items-center rounded-full border text-base"
-            >
+            <button type="button" onClick={() => setMenuOpen((current) => !current)} aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"} aria-expanded={menuOpen} className="theme-surface theme-text grid h-10 w-10 shrink-0 place-items-center rounded-full border text-base">
               <AnimatePresence mode="wait" initial={false}>
                 {menuOpen ? (
-                  <motion.span
-                    key="close"
-                    initial={{ opacity: 0, rotate: -90 }}
-                    animate={{ opacity: 1, rotate: 0 }}
-                    exit={{ opacity: 0, rotate: 90 }}
-                    transition={{ duration: 0.2 }}
-                    className="grid h-full w-full place-items-center"
-                  >
-                    <FaXmark className="block" />
+                  <motion.span key="close" initial={{ opacity: 0, rotate: -90 }} animate={{ opacity: 1, rotate: 0 }} exit={{ opacity: 0, rotate: 90 }} transition={{ duration: 0.2 }} className="grid h-full w-full place-items-center">
+                    <FaXmark />
                   </motion.span>
                 ) : (
-                  <motion.span
-                    key="menu"
-                    initial={{ opacity: 0, rotate: 90 }}
-                    animate={{ opacity: 1, rotate: 0 }}
-                    exit={{ opacity: 0, rotate: -90 }}
-                    transition={{ duration: 0.2 }}
-                    className="grid h-full w-full place-items-center"
-                  >
-                    <FaBars className="block" />
+                  <motion.span key="menu" initial={{ opacity: 0, rotate: 90 }} animate={{ opacity: 1, rotate: 0 }} exit={{ opacity: 0, rotate: -90 }} transition={{ duration: 0.2 }} className="grid h-full w-full place-items-center">
+                    <FaBars />
                   </motion.span>
                 )}
               </AnimatePresence>
