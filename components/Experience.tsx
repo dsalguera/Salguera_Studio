@@ -126,7 +126,10 @@ export default function Experience() {
       id="experience"
       className="relative w-full py-16 sm:py-20 lg:py-24"
     >
-      <div className="mx-auto w-full max-w-[1500px] px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+      {/* Ambient glow */}
+      <div className="theme-glow-secondary pointer-events-none absolute right-[-12rem] top-1/3 h-[420px] w-[420px] rounded-full opacity-20 blur-[100px] sm:h-[620px] sm:w-[620px]" />
+
+      <div className="relative mx-auto w-full max-w-[1500px] px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20">
         {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -138,18 +141,19 @@ export default function Experience() {
           }}
           className="max-w-3xl"
         >
-          <p className="mb-4 text-sm font-medium uppercase tracking-[0.3em] text-violet-400">
+          <p className="accent-text mb-4 text-sm font-medium uppercase tracking-[0.3em]">
             Experience
           </p>
 
-          <h2 className="text-3xl font-black tracking-[-0.035em] text-white sm:text-4xl md:text-5xl">
+          <h2 className="theme-text text-3xl font-black tracking-[-0.035em] sm:text-4xl md:text-5xl">
             Work shaped by
-            <span className="block bg-gradient-to-r from-violet-300 via-fuchsia-300 to-indigo-300 bg-clip-text text-transparent">
+
+            <span className="accent-gradient-text block">
               technology and design.
             </span>
           </h2>
 
-          <p className="mt-5 max-w-2xl text-base leading-7 text-zinc-300 sm:text-lg sm:leading-8">
+          <p className="theme-text-secondary mt-5 max-w-2xl text-base leading-7 sm:text-lg sm:leading-8">
             A multidisciplinary background spanning software, design,
             e-commerce, technical systems, and customer experience.
           </p>
@@ -168,33 +172,29 @@ export default function Experience() {
                 aria-pressed={active}
                 className={`group relative rounded-2xl border p-4 text-left transition-all duration-300 ${
                   active
-                    ? "border-violet-400/40 bg-violet-400/[0.09] shadow-[0_10px_35px_rgba(139,92,246,0.08)]"
-                    : "border-white/[0.08] bg-white/[0.025] hover:border-white/15 hover:bg-white/[0.05]"
+                    ? "border-[rgba(var(--accent-rgb),0.4)] bg-[rgba(var(--accent-rgb),0.1)] shadow-[0_10px_35px_rgba(var(--accent-rgb),0.1)]"
+                    : "theme-item"
                 }`}
               >
                 <div className="flex items-start gap-3">
                   <span
                     className={`mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full transition-all duration-300 ${
                       active
-                        ? "bg-violet-400 shadow-[0_0_14px_rgba(167,139,250,0.75)]"
-                        : "bg-zinc-700 group-hover:bg-zinc-500"
+                        ? "bg-[var(--accent-1)] shadow-[0_0_14px_rgba(var(--accent-rgb),0.75)]"
+                        : "bg-[var(--text-subtle)] opacity-50 group-hover:opacity-80"
                     }`}
                   />
 
                   <div className="min-w-0">
-                    <p
-                      className={`text-sm font-semibold transition-colors duration-300 ${
-                        active ? "text-white" : "text-zinc-300"
-                      }`}
-                    >
+                    <p className="theme-text text-sm font-semibold">
                       {job.company}
                     </p>
 
-                    <p className="mt-1 line-clamp-2 text-xs leading-5 text-zinc-400">
+                    <p className="theme-text-muted mt-1 line-clamp-2 text-xs leading-5">
                       {job.role}
                     </p>
 
-                    <span className="mt-2 inline-flex whitespace-nowrap rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.12em] text-zinc-400">
+                    <span className="theme-surface theme-text-muted mt-2 inline-flex whitespace-nowrap rounded-full border px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.12em]">
                       {job.period}
                     </span>
                   </div>
@@ -214,10 +214,10 @@ export default function Experience() {
             duration: 0.7,
             ease: [0.22, 1, 0.36, 1],
           }}
-          className="mt-5 grid overflow-hidden rounded-[1.75rem] border border-white/10 bg-black/25 shadow-[0_30px_100px_rgba(0,0,0,0.35)] lg:mt-12 lg:grid-cols-[0.8fr_1.2fr]"
+          className="theme-card mt-5 grid overflow-hidden rounded-[1.75rem] border lg:mt-12 lg:grid-cols-[0.8fr_1.2fr]"
         >
           {/* Desktop role navigation */}
-          <div className="hidden border-r border-white/10 bg-white/[0.025] p-4 lg:block">
+          <div className="hidden border-r border-[var(--border)] bg-[var(--surface)] p-4 lg:block">
             <div className="space-y-2">
               {experience.map((job, index) => {
                 const active = activeIndex === index;
@@ -230,33 +230,29 @@ export default function Experience() {
                     aria-pressed={active}
                     className={`group relative w-full rounded-2xl border p-4 text-left transition-all duration-300 ${
                       active
-                        ? "border-white/15 bg-white/[0.09]"
-                        : "border-transparent bg-transparent hover:border-white/[0.07] hover:bg-white/[0.04]"
+                        ? "border-[rgba(var(--accent-rgb),0.4)] bg-[rgba(var(--accent-rgb),0.1)] shadow-[0_10px_35px_rgba(var(--accent-rgb),0.08)]"
+                        : "theme-item"
                     }`}
                   >
                     <div className="flex items-start gap-3">
                       <span
                         className={`mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full transition-all duration-300 ${
                           active
-                            ? "bg-violet-400 shadow-[0_0_14px_rgba(167,139,250,0.75)]"
-                            : "bg-zinc-700 group-hover:bg-zinc-500"
+                            ? "bg-[var(--accent-1)] shadow-[0_0_14px_rgba(var(--accent-rgb),0.75)]"
+                            : "bg-[var(--text-subtle)] opacity-50 group-hover:opacity-80"
                         }`}
                       />
 
                       <div className="min-w-0">
-                        <p
-                          className={`truncate text-sm font-semibold transition-colors duration-300 ${
-                            active ? "text-white" : "text-zinc-300"
-                          }`}
-                        >
+                        <p className="theme-text truncate text-sm font-semibold">
                           {job.company}
                         </p>
 
-                        <p className="mt-1 line-clamp-2 text-xs leading-5 text-zinc-400">
+                        <p className="theme-text-muted mt-1 line-clamp-2 text-xs leading-5">
                           {job.role}
                         </p>
 
-                        <span className="mt-2 inline-flex whitespace-nowrap rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.12em] text-zinc-400">
+                        <span className="theme-surface theme-text-muted mt-2 inline-flex whitespace-nowrap rounded-full border px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.12em]">
                           {job.period}
                         </span>
                       </div>
@@ -266,9 +262,10 @@ export default function Experience() {
               })}
             </div>
           </div>
-                    {/* Active role */}
+
+          {/* Active role */}
           <div className="relative p-5 sm:p-7 lg:min-h-[500px] lg:p-10">
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/[0.045] via-transparent to-violet-500/[0.035]" />
+            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.04),transparent_55%,rgba(var(--accent-rgb),0.04))]" />
 
             <motion.div
               key={`${activeExperience.company}-${activeExperience.role}`}
@@ -281,36 +278,38 @@ export default function Experience() {
               className="relative"
             >
               {/* Header */}
-              <div className="flex flex-col gap-5 border-b border-white/10 pb-6 sm:flex-row sm:items-start sm:justify-between">
+              <div className="flex flex-col gap-5 border-b border-[var(--border)] pb-6 sm:flex-row sm:items-start sm:justify-between">
                 <div>
-                  <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.05] text-violet-300">
+                  <div className="theme-surface accent-text mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl border">
                     <FaBriefcase />
                   </div>
 
-                  <h3 className="max-w-2xl text-2xl font-bold leading-tight text-white sm:text-3xl">
+                  <h3 className="theme-text max-w-2xl text-2xl font-bold leading-tight sm:text-3xl">
                     {activeExperience.role}
                   </h3>
 
-                  <p className="mt-2 text-base font-medium text-violet-300">
+                  <p className="accent-text mt-2 text-base font-medium">
                     {activeExperience.company}
                   </p>
                 </div>
 
-                <div className="flex flex-col gap-2 text-sm text-zinc-400 sm:items-end">
+                <div className="theme-text-muted flex flex-col gap-2 text-sm sm:items-end">
                   <span className="flex items-center gap-2 whitespace-nowrap">
-                    <FaCalendarDays className="shrink-0 text-zinc-300" />
+                    <FaCalendarDays className="accent-text shrink-0" />
+
                     {activeExperience.period}
                   </span>
 
                   <span className="flex items-center gap-2">
-                    <FaLocationDot className="shrink-0 text-zinc-300" />
+                    <FaLocationDot className="accent-text shrink-0" />
+
                     {activeExperience.location}
                   </span>
                 </div>
               </div>
 
               {/* Summary */}
-              <p className="mt-6 max-w-3xl text-base leading-7 text-zinc-300 sm:text-lg sm:leading-8">
+              <p className="theme-text-secondary mt-6 max-w-3xl text-base leading-7 sm:text-lg sm:leading-8">
                 {activeExperience.summary}
               </p>
 
@@ -319,11 +318,11 @@ export default function Experience() {
                 {activeExperience.highlights.map((highlight) => (
                   <div
                     key={highlight}
-                    className="flex items-start gap-3 rounded-2xl border border-white/[0.07] bg-white/[0.035] p-4"
+                    className="theme-item flex items-start gap-3 rounded-2xl border p-4"
                   >
-                    <FaArrowRight className="mt-1 shrink-0 text-sm text-violet-300" />
+                    <FaArrowRight className="accent-text mt-1 shrink-0 text-sm" />
 
-                    <p className="text-sm leading-6 text-zinc-300 sm:text-base">
+                    <p className="theme-text-secondary text-sm leading-6 sm:text-base">
                       {highlight}
                     </p>
                   </div>
@@ -335,7 +334,7 @@ export default function Experience() {
                 {activeExperience.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="rounded-full border border-white/10 bg-white/[0.045] px-4 py-2 text-xs font-medium text-zinc-300"
+                    className="theme-surface theme-text-secondary rounded-full border px-4 py-2 text-xs font-medium"
                   >
                     {skill}
                   </span>
@@ -348,4 +347,3 @@ export default function Experience() {
     </section>
   );
 }
-          

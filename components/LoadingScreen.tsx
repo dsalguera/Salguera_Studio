@@ -1,161 +1,50 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
+import { ReactNode, useEffect, useState } from "react";
 
 type LoadingScreenProps = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
-export default function LoadingScreen({
-  children,
-}: LoadingScreenProps) {
+export default function LoadingScreen({ children }: LoadingScreenProps) {
   const [loading, setLoading] = useState(true);
-  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const hasVisited = sessionStorage.getItem("dsm-loader");
-
-    if (hasVisited) {
-      setLoading(false);
-      return;
-    }
-
-    sessionStorage.setItem("dsm-loader", "true");
-
-    document.body.style.overflow = "hidden";
-
-    const progressInterval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(progressInterval);
-
-          setTimeout(() => {
-            setLoading(false);
-            document.body.style.overflow = "";
-          }, 500);
-
-          return 100;
-        }
-
-        const increment =
-          prev < 25
-            ? 5
-            : prev < 60
-            ? 3
-            : prev < 85
-            ? 2
-            : 1;
-
-        return Math.min(prev + increment, 100);
-      });
-    }, 35);
-
-    return () => {
-      clearInterval(progressInterval);
-      document.body.style.overflow = "";
-    };
+    const timer = window.setTimeout(() => setLoading(false), 1300);
+    return () => window.clearTimeout(timer);
   }, []);
 
   return (
     <>
-      <AnimatePresence>
-
+      <AnimatePresence mode="wait">
         {loading && (
+          <motion.div initial={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }} className="fixed inset-0 z-[9999] flex min-h-[100svh] items-center justify-center overflow-hidden bg-[var(--page-background)]">
+            <div className="theme-grid pointer-events-none absolute inset-0 bg-[size:44px_44px] opacity-60 sm:bg-[size:60px_60px]" />
+            <div className="theme-glow-primary pointer-events-none absolute left-1/2 top-1/2 h-[360px] w-[360px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-30 blur-[80px] sm:h-[560px] sm:w-[560px]" />
 
-          <motion.div
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: .6 }}
-            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black"
-          >
-
-            {/* Background */}
-
-            <div className="absolute inset-0 bg-gradient-to-b from-black via-zinc-950 to-black" />
-
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:60px_60px]" />
-
-            <div className="absolute left-1/2 top-1/2 h-[650px] w-[650px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/5 blur-[120px]" />
-
-            {/* Content */}
-
-            <div className="relative z-10 flex w-full max-w-md flex-col items-center px-8">
-
-              {/* Logo */}
-
-              <motion.div
-                initial={{ opacity: 0, scale: 0.92 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                className="mb-10"
-              >
-                <img
-                  src="/logo.svg"
-                  alt="DSM Studio"
-                  className="h-24 w-auto drop-shadow-[0_0_18px_rgba(255,255,255,0.12)]"
-                />
+            <motion.div initial={{ opacity: 0, y: 18, scale: 0.96 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }} className="relative flex flex-col items-center text-center">
+              <motion.div animate={{ scale: [1, 1.04, 1] }} transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }} className="theme-card relative flex h-24 w-24 items-center justify-center overflow-hidden rounded-[2rem] border sm:h-28 sm:w-28">
+                <div className="theme-glow-primary pointer-events-none absolute inset-0 rounded-[inherit] opacity-25 blur-[24px]" />
+                <Image src="/logo.svg" alt="DSM Studio logo" width={58} height={58} priority className="navbar-logo relative h-14 w-auto sm:h-16" />
               </motion.div>
 
-              {/* Studio Name */}
+              <motion.p initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.45 }} className="accent-text mt-6 text-xs font-semibold uppercase tracking-[0.34em] sm:text-sm">DSM Studio</motion.p>
 
-              <motion.h1
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.25, duration: 0.7 }}
-                className="text-3xl font-bold tracking-[0.35em]"
-              >
-                DSM STUDIO
-              </motion.h1>
+              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35, duration: 0.45 }} className="theme-text-muted mt-3 text-sm">Preparing the experience</motion.p>
 
-              {/* Subtitle */}
-
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.75 }}
-                transition={{ delay: 0.45, duration: 0.6 }}
-                className="mt-4 text-sm uppercase tracking-[0.25em] text-zinc-400"
-              >
-                Full Stack Developer
-              </motion.p>
-
-              {/* Signature Line */}
-
-              <div className="relative mt-16 h-px w-72 overflow-hidden rounded-full bg-white/10">
-
-                <motion.div
-                  initial={{ width: 0 }}
-                  animate={{ width: "100%" }}
-                  transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1], delay: 0.8 }}
-                  className="absolute left-0 top-0 h-full bg-white"
-                />
-
-                <motion.div
-                  initial={{ x: "-120%" }}
-                  animate={{ x: "220%" }}
-                  transition={{ delay: 1.4, duration: 0.8, ease: "easeInOut" }}
-                  className="absolute top-0 h-full w-16 bg-gradient-to-r from-transparent via-white to-transparent opacity-90"
-                />
-
+              <div className="theme-surface mt-6 h-1 w-36 overflow-hidden rounded-full border">
+                <motion.div initial={{ x: "-100%" }} animate={{ x: "100%" }} transition={{ duration: 1.1, repeat: Infinity, ease: "easeInOut" }} className="h-full w-1/2 rounded-full bg-[linear-gradient(90deg,var(--accent-1),var(--accent-2),var(--accent-3))]" />
               </div>
-
-            </div>
-
+            </motion.div>
           </motion.div>
-
         )}
-
       </AnimatePresence>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: loading ? 0 : 1 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="min-h-screen"
-      >
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: loading ? 0 : 1 }} transition={{ duration: 0.45 }} className={loading ? "pointer-events-none" : ""}>
         {children}
       </motion.div>
-
     </>
   );
 }
