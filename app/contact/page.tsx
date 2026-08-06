@@ -67,11 +67,11 @@ export default function ContactPage() {
             </p>
 
             <div className="mt-8 space-y-3">
-              <a href="mailto:your-email@example.com" className="theme-item group flex items-center gap-4 rounded-2xl border p-4">
+              <a href="mailto:dsalguera23@gmail.com" className="theme-item group flex items-center gap-4 rounded-2xl border p-4">
                 <span className="theme-surface accent-text flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border"><FaEnvelope /></span>
                 <span className="min-w-0">
                   <span className="theme-text-subtle block text-xs uppercase tracking-[0.16em]">Email</span>
-                  <span className="theme-text mt-1 block truncate text-sm font-medium sm:text-base">your-email@example.com</span>
+                  <span className="theme-text mt-1 block truncate text-sm font-medium sm:text-base">dsalguera23@gmail.com</span>
                 </span>
               </a>
 

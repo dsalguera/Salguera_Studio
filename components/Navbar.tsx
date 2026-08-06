@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { FaArrowRight, FaBars, FaMoon, FaSun, FaXmark } from "react-icons/fa6";
+import { FaArrowRight, FaBars, FaFileArrowDown, FaMoon, FaSun, FaXmark } from "react-icons/fa6";
 
 type ThemeName = "dark" | "light";
 
@@ -86,7 +86,7 @@ export default function Navbar() {
             <button type="button" aria-label="Close navigation menu" onClick={() => setMenuOpen(false)} className="absolute inset-0 h-full w-full bg-black/40 backdrop-blur-sm" />
 
             <div className="mobile-menu-position">
-              <motion.div initial={{ opacity: 0, y: -12, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -12, scale: 0.98 }} transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }} className="theme-card mobile-menu-card rounded-[1.5rem] border p-3">
+              <motion.div initial={{ opacity: 0, y: -12, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -12, scale: 0.98 }} transition={{ duration: 0.25, ease: [0.22,1,0.36,1] }} className="theme-card mobile-menu-card rounded-[1.5rem] border p-3">
                 <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.05),transparent_55%,rgba(var(--accent-rgb),0.05))]" />
 
                 <div className="relative space-y-2">
@@ -104,7 +104,12 @@ export default function Navbar() {
                   })}
                 </div>
 
-                <div className="relative mt-3 border-t border-[var(--border)] pt-3">
+                <div className="relative mt-3 space-y-2 border-t border-[var(--border)] pt-3">
+                  <a href="/resume/david-salguera-resume.pdf" target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)} className="theme-secondary-button group flex w-full items-center justify-center gap-3 rounded-full border px-5 py-3.5 text-sm font-semibold">
+                    <FaFileArrowDown className="accent-text text-sm" />
+                    View Résumé
+                  </a>
+
                   <Link href="/contact" scroll onClick={handleNavigation} className="theme-primary-button group flex w-full items-center justify-center gap-3 rounded-full px-5 py-3.5 text-sm font-semibold">
                     Let&apos;s Talk
                     <FaArrowRight className="text-xs transition-transform group-hover:translate-x-1" />
@@ -146,7 +151,7 @@ export default function Navbar() {
           </div>
 
           <div className="hidden items-center justify-end gap-3 lg:flex">
-            <button type="button" onClick={toggleTheme} aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"} className="theme-surface theme-text-secondary grid h-11 w-11 shrink-0 place-items-center rounded-full border">
+            <button type="button" onClick={toggleTheme} aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"} className="theme-surface theme-text-secondary grid h-11 w-11 shrink-0 place-items-center rounded-full border transition hover:-translate-y-0.5">
               <AnimatePresence mode="wait" initial={false}>
                 <motion.span key={theme} initial={{ opacity: 0, rotate: -60, scale: 0.8 }} animate={{ opacity: 1, rotate: 0, scale: 1 }} exit={{ opacity: 0, rotate: 60, scale: 0.8 }} transition={{ duration: 0.2 }} className="grid h-full w-full place-items-center">
                   {themeIcon}
@@ -154,7 +159,12 @@ export default function Navbar() {
               </AnimatePresence>
             </button>
 
-            <Link href="/contact" scroll onClick={handleNavigation} className="theme-secondary-button group inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-medium">
+            <a href="/resume/david-salguera-resume.pdf" target="_blank" rel="noopener noreferrer" className="theme-secondary-button group inline-flex items-center gap-2 rounded-full border px-4 py-2.5 text-sm font-medium transition hover:scale-[1.03]">
+              <FaFileArrowDown className="accent-text text-xs" />
+              Résumé
+            </a>
+
+            <Link href="/contact" scroll onClick={handleNavigation} className="theme-secondary-button group inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-medium transition hover:scale-[1.03]">
               Let&apos;s Talk
               <FaArrowRight className="accent-text text-xs transition-transform group-hover:translate-x-1" />
             </Link>
