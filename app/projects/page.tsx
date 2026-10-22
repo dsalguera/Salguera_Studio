@@ -27,14 +27,20 @@ const projects: Project[] = [
     description:
       "A modern, responsive educational landing page developed from a visual design concept using HTML, CSS, and JavaScript. Featuring a Human × Technology visual identity, immersive layouts, interactive elements, and a refined experience across desktop, tablet, and mobile devices.",
     image: "/projects/nova-academy.png",
-    tech: [
-      "HTML5",
-      "CSS3",
-      "JavaScript",
-      "Responsive Design",
-    ],
+    tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
     github: "https://github.com/dsalguera/NOVA_Studio",
     live: "https://dsalguera.github.io/NOVA_Studio/",
+    category: "UI to Code",
+    year: "2026",
+  },
+  {
+    title: "Food Lovers",
+    description:
+      "A modern, responsive food and restaurant landing page focused on engaging visuals, clean layouts, and intuitive navigation. A creative design concept transformed into an engaging web experience.",
+    image: "/projects/food-lovers.png",
+    tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
+    github: "https://github.com/dsalguera/Food_Lovers",
+    live: "https://dsalguera.github.io/Food_Lovers/",
     category: "UI to Code",
     year: "2026",
   },
@@ -44,8 +50,6 @@ const projects: Project[] = [
       "A full-stack product and order management platform with a Laravel API, React interface, MySQL database, authentication, inventory tracking, and responsive administration tools.",
     image: "/projects/project1.png",
     tech: ["Laravel", "React", "MySQL", "REST API"],
-    github: "https://github.com/yourrepo",
-    live: "https://yourdemo.com",
     category: "Full Stack",
     year: "2026",
   },
@@ -55,8 +59,6 @@ const projects: Project[] = [
       "A responsive movie discovery platform with dynamic browsing, API integration, detailed movie pages, and a Node.js backend deployed online.",
     image: "/projects/project2.png",
     tech: ["React", "Node.js", "Tailwind CSS", "API"],
-    github: "https://github.com/yourrepo2",
-    live: "https://yourdemo2.com",
     category: "Web Application",
     year: "2025",
   },
@@ -66,7 +68,6 @@ const projects: Project[] = [
       "A Laravel-based lottery management system covering drawings, schedules, tickets, winning numbers, users, reports, and configurable game parameters.",
     image: "/projects/lottery.png",
     tech: ["Laravel", "PHP", "MySQL", "Sanctum"],
-    github: "https://github.com/yourrepo3",
     category: "Backend System",
     year: "2025",
   },
@@ -84,14 +85,12 @@ const projects: Project[] = [
 export default function ProjectsPage() {
   return (
     <main className="relative min-h-screen w-full overflow-hidden pb-20 pt-28 sm:pb-24 sm:pt-32">
-
       {/* Ambient glows */}
       <div className="theme-glow-primary pointer-events-none absolute -left-56 top-32 h-[500px] w-[500px] rounded-full opacity-20 blur-[110px] sm:h-[720px] sm:w-[720px]" />
 
       <div className="theme-glow-secondary pointer-events-none absolute -right-56 top-[45%] h-[480px] w-[480px] rounded-full opacity-20 blur-[110px] sm:h-[680px] sm:w-[680px]" />
 
       <div className="relative mx-auto w-full max-w-[1500px] px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20">
-
         {/* Page heading */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -133,18 +132,9 @@ export default function ProjectsPage() {
           {projects.map((project, index) => (
             <motion.article
               key={project.title}
-              initial={{
-                opacity: 0,
-                y: 28,
-              }}
-              whileInView={{
-                opacity: 1,
-                y: 0,
-              }}
-              viewport={{
-                once: true,
-                amount: 0.12,
-              }}
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.12 }}
               transition={{
                 delay: index * 0.05,
                 duration: 0.65,
@@ -152,7 +142,6 @@ export default function ProjectsPage() {
               }}
               className="theme-card group grid overflow-hidden rounded-[1.75rem] border lg:grid-cols-[1.05fr_0.95fr]"
             >
-
               {/* Project image */}
               <div
                 className={`relative min-h-[260px] overflow-hidden border-b border-[var(--border)] sm:min-h-[360px] lg:min-h-[430px] lg:border-b-0 ${
@@ -192,7 +181,6 @@ export default function ProjectsPage() {
                 <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.035),transparent_55%,rgba(var(--accent-rgb),0.045))]" />
 
                 <div className="relative">
-
                   {/* Project number */}
                   <p className="accent-text text-xs font-medium uppercase tracking-[0.22em]">
                     Project {String(index + 1).padStart(2, "0")}
@@ -222,7 +210,6 @@ export default function ProjectsPage() {
 
                   {/* Project links */}
                   <div className="mt-8 flex flex-wrap gap-3 border-t border-[var(--border)] pt-6">
-
                     {project.github && (
                       <a
                         href={project.github}
@@ -243,7 +230,6 @@ export default function ProjectsPage() {
                         className="theme-primary-button group/link inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition"
                       >
                         Live Demo
-
                         <FaArrowUpRightFromSquare className="text-xs transition-transform group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5" />
                       </a>
                     )}
@@ -261,7 +247,6 @@ export default function ProjectsPage() {
             className="theme-secondary-button group inline-flex items-center gap-3 rounded-full border px-6 py-3.5 font-medium transition hover:scale-[1.02]"
           >
             Have a project in mind?
-
             <FaArrowRight className="accent-text text-sm transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
