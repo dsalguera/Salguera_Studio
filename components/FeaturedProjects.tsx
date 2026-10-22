@@ -17,9 +17,21 @@ type Project = {
   github?: string;
   live?: string;
   featured?: boolean;
+  category?: string;
 };
 
 const projects: Project[] = [
+  {
+    title: "NOVA Academy",
+    description:
+      "A modern, fully responsive educational landing page developed from a visual design concept. Built with HTML, CSS, and JavaScript, featuring a Human × Technology visual identity, interactive elements, and immersive layouts.",
+    image: "/projects/nova-academy.png",
+    tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
+    github: "https://github.com/dsalguera/NOVA_Studio",
+    live: "https://dsalguera.github.io/NOVA_Studio/",
+    featured: true,
+    category: "UI TO CODE",
+  },
   {
     title: "Laravel + React CRUD System",
     description:
@@ -28,7 +40,7 @@ const projects: Project[] = [
     tech: ["Laravel", "React", "MySQL", "REST API"],
     github: "https://github.com/yourrepo",
     live: "https://yourdemo.com",
-    featured: true,
+    category: "FULL STACK",
   },
   {
     title: "Cinepedia",
@@ -38,6 +50,7 @@ const projects: Project[] = [
     tech: ["React", "Node.js", "Tailwind CSS", "API"],
     github: "https://github.com/yourrepo2",
     live: "https://yourdemo2.com",
+    category: "WEB APPLICATION",
   },
   {
     title: "CNC Workflow System",
@@ -45,6 +58,7 @@ const projects: Project[] = [
       "A practical workflow for CNC production, toolpath organization, laser engraving, digital fabrication, and repeatable workshop processes.",
     image: "/projects/cnc.png",
     tech: ["Fusion 360", "LightBurn", "CNC", "Automation"],
+    category: "DIGITAL FABRICATION",
   },
 ];
 
@@ -77,13 +91,14 @@ export default function FeaturedProjects() {
             <h2 className="theme-text text-3xl font-black tracking-[-0.035em] sm:text-4xl md:text-5xl">
               Selected work across
               <span className="accent-gradient-text block">
-                software and fabrication.
+                development and design.
               </span>
             </h2>
 
             <p className="theme-text-secondary mt-5 max-w-2xl text-base leading-7 sm:text-lg sm:leading-8">
-              Projects combining development, design, automation, e-commerce,
-              and practical production workflows.
+              A collection of web experiences, applications, and creative
+              solutions combining modern development technologies with
+              thoughtful design.
             </p>
           </div>
 
@@ -138,9 +153,17 @@ export default function FeaturedProjects() {
 
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent opacity-70" />
 
+                {/* Featured badge */}
                 {project.featured && (
                   <span className="absolute left-4 top-4 rounded-full border border-white/15 bg-black/45 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.16em] text-white backdrop-blur-xl">
                     Featured
+                  </span>
+                )}
+
+                {/* Category badge */}
+                {project.category && (
+                  <span className="absolute bottom-4 left-4 rounded-full border border-white/15 bg-black/55 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-white backdrop-blur-xl">
+                    {project.category}
                   </span>
                 )}
               </div>
