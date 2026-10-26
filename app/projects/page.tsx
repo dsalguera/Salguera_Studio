@@ -45,6 +45,17 @@ const projects: Project[] = [
     year: "2026",
   },
   {
+    title: "LuckyTimes V3",
+    description:
+      "A modern full-stack lottery management platform featuring an interactive dashboard, drawing schedules, results management, administrative tools, and responsive interfaces designed for real-world operations.",
+    image: "/projects/luckytimes.png",
+    tech: ["Next.js", "React", "TypeScript", "MySQL"],
+    github: "https://github.com/dsalguera/LuckyTimesV3",
+    live: "https://luckytimes.salguerastudio.com/",
+    category: "Full Stack",
+    year: "2026",
+  },
+  {
     title: "Laravel + React CRUD System",
     description:
       "A full-stack product and order management platform with a Laravel API, React interface, MySQL database, authentication, inventory tracking, and responsive administration tools.",
@@ -60,15 +71,6 @@ const projects: Project[] = [
     image: "/projects/project2.png",
     tech: ["React", "Node.js", "Tailwind CSS", "API"],
     category: "Web Application",
-    year: "2025",
-  },
-  {
-    title: "LuckyTimes Lottery System",
-    description:
-      "A Laravel-based lottery management system covering drawings, schedules, tickets, winning numbers, users, reports, and configurable game parameters.",
-    image: "/projects/lottery.png",
-    tech: ["Laravel", "PHP", "MySQL", "Sanctum"],
-    category: "Backend System",
     year: "2025",
   },
   {
@@ -132,9 +134,18 @@ export default function ProjectsPage() {
           {projects.map((project, index) => (
             <motion.article
               key={project.title}
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.12 }}
+              initial={{
+                opacity: 0,
+                y: 28,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              viewport={{
+                once: true,
+                amount: 0.12,
+              }}
               transition={{
                 delay: index * 0.05,
                 duration: 0.65,
@@ -230,6 +241,7 @@ export default function ProjectsPage() {
                         className="theme-primary-button group/link inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition"
                       >
                         Live Demo
+
                         <FaArrowUpRightFromSquare className="text-xs transition-transform group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5" />
                       </a>
                     )}
@@ -247,6 +259,7 @@ export default function ProjectsPage() {
             className="theme-secondary-button group inline-flex items-center gap-3 rounded-full border px-6 py-3.5 font-medium transition hover:scale-[1.02]"
           >
             Have a project in mind?
+
             <FaArrowRight className="accent-text text-sm transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
