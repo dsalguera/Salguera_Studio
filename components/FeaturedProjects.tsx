@@ -44,11 +44,14 @@ const projects: Project[] = [
     category: "UI TO CODE",
   },
   {
-    title: "Laravel + React CRUD System",
+    title: "LuckyTimes V3",
     description:
-      "A full-stack product and order management platform with a Laravel API, React interface, MySQL database, and responsive administration tools.",
-    image: "/projects/project1.png",
-    tech: ["Laravel", "React", "MySQL", "REST API"],
+      "A modern full-stack lottery management platform featuring an interactive dashboard, drawing schedules, results management, administrative tools, and responsive interfaces designed for real-world operations.",
+    image: "/projects/luckytimes.png",
+    tech: ["Next.js", "React", "TypeScript", "MySQL"],
+    github: "https://github.com/dsalguera/LuckyTimesV3",
+    live: "https://luckytimes.salguerastudio.com/",
+    featured: true,
     category: "FULL STACK",
   },
 ];
@@ -98,6 +101,7 @@ export default function FeaturedProjects() {
             className="theme-secondary-button group inline-flex w-full items-center justify-center gap-3 rounded-full border px-6 py-3 font-medium transition duration-300 hover:scale-[1.02] sm:w-auto"
           >
             View all projects
+
             <FaArrowRight className="accent-text text-sm transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
         </motion.div>
@@ -107,20 +111,31 @@ export default function FeaturedProjects() {
           {projects.map((project, index) => (
             <motion.article
               key={project.title}
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.15 }}
+              initial={{
+                opacity: 0,
+                y: 28,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              viewport={{
+                once: true,
+                amount: 0.15,
+              }}
               transition={{
                 delay: index * 0.08,
                 duration: 0.65,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              whileHover={{ y: -5 }}
+              whileHover={{
+                y: -5,
+              }}
               className={`theme-card group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border ${
                 project.featured ? "md:col-span-2 xl:col-span-1" : ""
               }`}
             >
-              {/* Image */}
+              {/* Project image */}
               <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-[var(--border)]">
                 <Image
                   src={project.image}
@@ -132,12 +147,14 @@ export default function FeaturedProjects() {
 
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent opacity-70" />
 
+                {/* Featured badge */}
                 {project.featured && (
                   <span className="absolute left-4 top-4 rounded-full border border-white/15 bg-black/45 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.16em] text-white backdrop-blur-xl">
                     Featured
                   </span>
                 )}
 
+                {/* Category badge */}
                 {project.category && (
                   <span className="absolute bottom-4 left-4 rounded-full border border-white/15 bg-black/55 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-white backdrop-blur-xl">
                     {project.category}
@@ -145,7 +162,7 @@ export default function FeaturedProjects() {
                 )}
               </div>
 
-              {/* Content */}
+              {/* Project content */}
               <div className="flex flex-1 flex-col p-5 sm:p-6">
                 <h3 className="theme-text text-xl font-bold leading-tight sm:text-2xl">
                   {project.title}
@@ -167,7 +184,7 @@ export default function FeaturedProjects() {
                   ))}
                 </div>
 
-                {/* Links */}
+                {/* Project links */}
                 <div className="mt-auto flex flex-wrap items-center gap-3 border-t border-[var(--border)] pt-6">
                   {project.github && (
                     <a
@@ -189,6 +206,7 @@ export default function FeaturedProjects() {
                       className="theme-primary-button group/link inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold transition duration-300"
                     >
                       Live Demo
+
                       <FaArrowUpRightFromSquare className="text-xs transition-transform duration-300 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5" />
                     </a>
                   )}
