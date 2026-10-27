@@ -4,6 +4,7 @@ import Skills from "@/components/Skills";
 import Experience from "@/components/Experience";
 import FeaturedProjects from "@/components/FeaturedProjects";
 import CTA from "@/components/CTA";
+import MyProcess from "@/components/MyProcess";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       <Skills />
       <FeaturedProjects />
       <Experience />
+      <MyProcess />
       <CTA />
     </main>
   );

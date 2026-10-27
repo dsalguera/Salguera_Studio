@@ -4,7 +4,6 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   FaArrowRight,
-  FaEnvelope,
   FaLocationDot,
 } from "react-icons/fa6";
 
@@ -68,13 +67,6 @@ export default function CTA() {
                 <FaArrowRight className="text-sm transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
 
-              <a
-                href="/contact"
-                className="theme-secondary-button group inline-flex w-full items-center justify-center gap-3 rounded-full border px-7 py-3.5 font-medium transition duration-300 hover:scale-[1.02] sm:w-auto"
-              >
-                <FaEnvelope className="accent-text text-sm" />
-                Contact Me
-              </a>
             </div>
 
             {/* Details */}
