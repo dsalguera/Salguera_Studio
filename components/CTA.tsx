@@ -4,7 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   FaArrowRight,
-  FaEnvelope,
+  FaBriefcase,
   FaLocationDot,
 } from "react-icons/fa6";
 
@@ -12,7 +12,7 @@ export default function CTA() {
   return (
     <section
       id="contact"
-      className="relative w-full overflow-hidden py-16 sm:py-20 lg:py-24"
+      className="relative w-full overflow-hidden py-12 sm:py-14 lg:py-16"
     >
       {/* Background glows */}
       <div className="theme-glow-primary pointer-events-none absolute left-1/2 top-1/2 h-[440px] w-[440px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-25 blur-[100px] sm:h-[700px] sm:w-[700px]" />
@@ -28,7 +28,7 @@ export default function CTA() {
             duration: 0.7,
             ease: [0.22, 1, 0.36, 1],
           }}
-          className="theme-card relative overflow-hidden rounded-[2rem] border px-5 py-12 text-center sm:px-10 sm:py-16 md:px-14 lg:py-20"
+          className="theme-card relative overflow-hidden rounded-[2rem] border px-5 py-12 text-center sm:px-10 sm:py-12 md:px-14 lg:py-14"
         >
           {/* Decorative reflection */}
           <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.055),transparent_50%,rgba(var(--accent-rgb),0.055))]" />
@@ -39,22 +39,20 @@ export default function CTA() {
           <div className="relative mx-auto flex max-w-4xl flex-col items-center">
             {/* Label */}
             <p className="accent-text text-xs font-medium uppercase tracking-[0.28em] sm:text-sm">
-              Let&apos;s Work Together
+              Get in touch
             </p>
 
             {/* Heading */}
             <h2 className="theme-text mt-5 text-3xl font-black leading-tight tracking-[-0.04em] sm:text-4xl md:text-5xl lg:text-6xl">
-              Have an idea worth
+              Designed with intention.
               <span className="accent-gradient-text block">
-                bringing to life?
+                Built with code.
               </span>
             </h2>
 
             {/* Description */}
             <p className="theme-text-secondary mt-6 max-w-2xl text-base leading-7 sm:text-lg sm:leading-8">
-              I&apos;m open to software projects, creative collaborations,
-              e-commerce work, design challenges, and opportunities that connect
-              technology with real-world products.
+              Let&apos;s create something meaningful together. I&apos;m open to new opportunities, software projects, and interesting collaborations.
             </p>
 
             {/* Buttons */}
@@ -63,17 +61,17 @@ export default function CTA() {
                 href="/contact"
                 className="theme-primary-button group inline-flex w-full items-center justify-center gap-3 rounded-full px-7 py-3.5 font-semibold transition duration-300 sm:w-auto"
               >
-                Start a Conversation
+                Let's Talk
 
                 <FaArrowRight className="text-sm transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
 
               <a
-                href="mailto:your-email@example.com"
+                href="/projects"
                 className="theme-secondary-button group inline-flex w-full items-center justify-center gap-3 rounded-full border px-7 py-3.5 font-medium transition duration-300 hover:scale-[1.02] sm:w-auto"
               >
-                <FaEnvelope className="accent-text text-sm" />
-                Email Me
+                <FaBriefcase className="accent-text text-sm" />
+                View Projects
               </a>
             </div>
 

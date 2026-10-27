@@ -60,7 +60,7 @@ export default function FeaturedProjects() {
   return (
     <section
       id="projects"
-      className="relative w-full overflow-hidden py-16 sm:py-20 lg:py-24"
+      className="relative w-full overflow-hidden py-12 sm:py-14 lg:py-16"
     >
       {/* Ambient glow */}
       <div className="theme-glow-primary pointer-events-none absolute -left-52 top-1/3 h-[440px] w-[440px] rounded-full opacity-20 blur-[100px] sm:h-[650px] sm:w-[650px]" />
@@ -107,7 +107,7 @@ export default function FeaturedProjects() {
         </motion.div>
 
         {/* Project grid */}
-        <div className="mt-10 grid gap-5 sm:mt-12 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-8 grid gap-5 sm:mt-10 md:grid-cols-2 xl:grid-cols-3">
           {projects.map((project, index) => (
             <motion.article
               key={project.title}
@@ -136,7 +136,7 @@ export default function FeaturedProjects() {
               }`}
             >
               {/* Project image */}
-              <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-[var(--border)]">
+              <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-[var(--border)]">
                 <Image
                   src={project.image}
                   alt={project.title}

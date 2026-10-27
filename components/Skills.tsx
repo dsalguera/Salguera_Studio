@@ -175,7 +175,7 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="relative w-full overflow-hidden py-16 sm:py-20 lg:py-24"
+      className="relative w-full overflow-hidden py-12 sm:py-14 lg:py-16"
     >
       {/* Ambient glow */}
       <div className="theme-glow-primary pointer-events-none absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-20 blur-[90px] sm:h-[620px] sm:w-[620px]" />
