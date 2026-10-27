@@ -87,7 +87,7 @@ export default function Experience() {
   const activeExperience = experience[activeIndex];
 
   return (
-    <section id="experience" className="relative w-full py-12 sm:py-14 lg:py-16">
+    <section id="experience" className="relative w-full py-20 sm:py-24 lg:py-28">
       <div className="theme-glow-secondary pointer-events-none absolute -right-48 top-1/3 h-[420px] w-[420px] rounded-full opacity-20 blur-[100px] sm:h-[620px] sm:w-[620px]" />
 
       <div className="relative mx-auto w-full max-w-[1500px] px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20">
@@ -115,7 +115,7 @@ export default function Experience() {
         </motion.div>
 
         {/* MOBILE EXPERIENCE SELECTOR */}
-        <div className="mt-9 flex flex-col gap-4 min-[520px]:grid min-[520px]:grid-cols-2 lg:hidden">
+        <div className="mt-14 flex flex-col gap-4 min-[520px]:grid min-[520px]:grid-cols-2 lg:hidden">
           {experience.map((job, index) => {
             const active = activeIndex === index;
 
@@ -164,7 +164,7 @@ export default function Experience() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
           transition={{ delay: 0.1, duration: 0.7, ease: [0.22,1,0.36,1] }}
-          className="theme-card mt-8 grid overflow-hidden rounded-[1.75rem] border lg:mt-10 lg:grid-cols-[0.82fr_1.18fr]"
+          className="theme-card mt-8 grid overflow-hidden rounded-[1.75rem] border lg:mt-16 lg:grid-cols-[0.82fr_1.18fr]"
         >
           {/* DESKTOP EXPERIENCE SELECTOR */}
           <div className="hidden border-r border-[var(--border)] bg-[var(--surface)] p-5 lg:block xl:p-6">
@@ -213,7 +213,7 @@ export default function Experience() {
           </div>
 
           {/* ACTIVE EXPERIENCE */}
-          <div className="relative p-5 sm:p-7 lg:min-h-[420px] lg:p-10">
+          <div className="relative p-5 sm:p-7 lg:min-h-[520px] lg:p-10">
             <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.04),transparent_55%,rgba(var(--accent-rgb),0.04))]" />
 
             <motion.div
