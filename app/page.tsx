@@ -3,7 +3,6 @@ import About from "@/components/About";
 import Skills from "@/components/Skills";
 import Experience from "@/components/Experience";
 import FeaturedProjects from "@/components/FeaturedProjects";
-import CTA from "@/components/CTA";
 import MyProcess from "@/components/MyProcess";
 
 export default function Home() {
@@ -12,10 +11,9 @@ export default function Home() {
       <Hero />
       <About />
       <Skills />
-      <FeaturedProjects />
       <Experience />
+      <FeaturedProjects />
       <MyProcess />
-      <CTA />
     </main>
   );
 }
