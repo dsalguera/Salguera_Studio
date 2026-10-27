@@ -87,7 +87,7 @@ export default function Experience() {
   const activeExperience = experience[activeIndex];
 
   return (
-    <section id="experience" className="relative w-full py-20 sm:py-24 lg:py-28">
+    <section id="experience" className="relative w-full py-12 sm:py-14 lg:py-16">
       <div className="theme-glow-secondary pointer-events-none absolute -right-48 top-1/3 h-[420px] w-[420px] rounded-full opacity-20 blur-[100px] sm:h-[620px] sm:w-[620px]" />
 
       <div className="relative mx-auto w-full max-w-[1500px] px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20">

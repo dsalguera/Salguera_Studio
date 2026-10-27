@@ -60,7 +60,7 @@ export default function FeaturedProjects() {
   return (
     <section
       id="projects"
-      className="relative w-full overflow-hidden py-16 sm:py-20 lg:py-24"
+      className="relative w-full overflow-hidden py-12 sm:py-14 lg:py-16"
     >
       {/* Ambient glow */}
       <div className="theme-glow-primary pointer-events-none absolute -left-52 top-1/3 h-[440px] w-[440px] rounded-full opacity-20 blur-[100px] sm:h-[650px] sm:w-[650px]" />

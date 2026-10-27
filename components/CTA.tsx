@@ -69,11 +69,11 @@ export default function CTA() {
               </Link>
 
               <a
-                href="mailto:your-email@example.com"
+                href="/contact"
                 className="theme-secondary-button group inline-flex w-full items-center justify-center gap-3 rounded-full border px-7 py-3.5 font-medium transition duration-300 hover:scale-[1.02] sm:w-auto"
               >
                 <FaEnvelope className="accent-text text-sm" />
-                Email Me
+                Contact Me
               </a>
             </div>
 
