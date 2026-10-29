@@ -58,7 +58,7 @@ const projects: Project[] = [
     title: "Cinepedia",
     description:
       "A responsive movie discovery platform with dynamic browsing, API integration, detailed movie pages, and a Node.js backend deployed online.",
-    image: "/projects/cinepedia.svg",
+    image: "/projects/cinepedia.png",
     tech: ["React", "Node.js", "Tailwind CSS", "API"],
     github: "https://github.com/dsalguera/cinepedia_movies",
     live: "https://cinepedia.salguerastudio.com/",
