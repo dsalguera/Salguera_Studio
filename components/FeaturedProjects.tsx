@@ -54,6 +54,17 @@ const projects: Project[] = [
     featured: true,
     category: "FULL STACK",
   },
+  {
+    title: "Cinepedia",
+    description:
+      "A responsive movie discovery platform with dynamic browsing, API integration, detailed movie pages, and a Node.js backend deployed online.",
+    image: "/projects/cinepedia.svg",
+    tech: ["React", "Node.js", "Tailwind CSS", "API"],
+    github: "https://github.com/dsalguera/cinepedia_movies",
+    live: "https://cinepedia.salguerastudio.com/",
+    featured: true,
+    category: "WEB APPLICATION",
+  },
 ];
 
 export default function FeaturedProjects() {
@@ -107,7 +118,7 @@ export default function FeaturedProjects() {
         </motion.div>
 
         {/* Project grid */}
-        <div className="mt-10 grid gap-5 sm:mt-12 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-10 grid gap-5 sm:mt-12 md:grid-cols-2 xl:grid-cols-4">
           {projects.map((project, index) => (
             <motion.article
               key={project.title}
