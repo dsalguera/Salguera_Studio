@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { FaArrowLeft, FaArrowRight, FaXmark } from "react-icons/fa6";
 
-type Category = "All" | "Branding" | "Print" | "Digital" | "E-commerce";
+type Category = "All" | "Branding" | "Print" | "Advertising";
 
 type GalleryItem = {
   title: string;
@@ -17,72 +17,64 @@ type GalleryItem = {
   size: "small" | "medium" | "large" | "wide";
 };
 
-const categories: Category[] = ["All", "Branding", "Print", "Digital", "E-commerce"];
+const categories: Category[] = ["All", "Branding", "Print", "Advertising"];
 
 const galleryItems: GalleryItem[] = [
   {
-    title: "Brand Identity System",
+    title: "SOLADO · Costa Rica Ice Cream",
     category: "Branding",
-    description: "Logo development, typography, color system, and supporting visual assets.",
-    image: "/gallery/branding-1.jpg",
+    description: "A playful tropical identity brought to life through a realistic branded product mockup.",
+    image: "/gallery/solado.webp",
     year: "2026",
     size: "large",
   },
   {
-    title: "Product Campaign",
-    category: "E-commerce",
-    description: "Product photography, promotional graphics, and digital storefront content.",
-    image: "/gallery/ecommerce-1.jpg",
+    title: "Tom Summer Adventure",
+    category: "Branding",
+    description: "Adventure brand identity presented as a real-world vehicle decal.",
+    image: "/gallery/tom.webp",
     year: "2026",
     size: "medium",
   },
   {
-    title: "Editorial Print Series",
-    category: "Print",
-    description: "Print-ready layouts created for marketing, communication, and production.",
-    image: "/gallery/print-1.jpg",
-    year: "2025",
-    size: "small",
-  },
-  {
-    title: "Social Media Campaign",
-    category: "Digital",
-    description: "A coordinated visual campaign designed for multiple digital platforms.",
-    image: "/gallery/digital-1.jpg",
-    year: "2025",
-    size: "wide",
-  },
-  {
-    title: "Packaging Concept",
+    title: "Remodeling Bonilla LLC",
     category: "Branding",
-    description: "Packaging graphics and product presentation developed around a cohesive identity.",
-    image: "/gallery/branding-2.jpg",
-    year: "2025",
+    description: "A confident visual identity for a remodeling business, shown in a professional brand mockup.",
+    image: "/gallery/bonilla.webp",
+    year: "2026",
     size: "medium",
   },
   {
-    title: "Retail Promotion",
+    title: "Mantaraya ATV Adventures",
+    category: "Advertising",
+    description: "Promotional artwork for an outdoor adventure experience in Costa Rica.",
+    image: "/gallery/mantaraya.webp",
+    year: "2026",
+    size: "medium",
+  },
+  {
+    title: "Hotel Restaurante Buddha",
     category: "Print",
-    description: "Large-format promotional artwork prepared for professional print production.",
-    image: "/gallery/print-2.jpg",
-    year: "2025",
+    description: "Hospitality signage and guest-facing information with a distinctive visual identity.",
+    image: "/gallery/buddha.webp",
+    year: "2026",
+    size: "wide",
+  },
+  {
+    title: "Hotel Las Brisas",
+    category: "Print",
+    description: "Restaurant menu design presented in an authentic hospitality setting.",
+    image: "/gallery/lasbrisas.webp",
+    year: "2026",
     size: "large",
   },
   {
-    title: "Marketplace Listing Design",
-    category: "E-commerce",
-    description: "Product listing images, comparison graphics, and conversion-focused visual content.",
-    image: "/gallery/ecommerce-2.jpg",
+    title: "Gabriel’s Custom Tours",
+    category: "Branding",
+    description: "Tourism brand identity designed for a memorable local experience.",
+    image: "/gallery/gabrieltours.webp",
     year: "2026",
-    size: "wide",
-  },
-  {
-    title: "Interface Exploration",
-    category: "Digital",
-    description: "A visual interface concept focused on clarity, hierarchy, and responsive presentation.",
-    image: "/gallery/digital-2.jpg",
-    year: "2026",
-    size: "small",
+    size: "medium",
   },
 ];
 
@@ -96,6 +88,15 @@ const sizeClasses = {
 export default function GalleryPage() {
   const [activeCategory, setActiveCategory] = useState<Category>("All");
   const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null);
+
+  useEffect(() => {
+    if (!selectedItem) return;
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setSelectedItem(null);
+    };
+    window.addEventListener("keydown", handleEscape);
+    return () => window.removeEventListener("keydown", handleEscape);
+  }, [selectedItem]);
 
   const filteredItems = useMemo(() => {
     if (activeCategory === "All") return galleryItems;
@@ -122,7 +123,7 @@ export default function GalleryPage() {
           </h1>
 
           <p className="theme-text-secondary mt-6 max-w-3xl text-base leading-7 sm:text-lg sm:leading-8">
-            A curated collection of branding, print, digital design, and e-commerce work developed for real products, campaigns, and production environments.
+            Selected branding, print, and advertising work—presented through real-world mockups that show how each design comes to life.
           </p>
         </motion.div>
 
@@ -142,7 +143,7 @@ export default function GalleryPage() {
           <AnimatePresence mode="popLayout">
             {filteredItems.map((item, index) => (
               <motion.button key={item.title} layout initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.96 }} transition={{ duration: 0.4, delay: index * 0.035, ease: [0.22, 1, 0.36, 1] }} type="button" onClick={() => setSelectedItem(item)} className={`theme-card group relative overflow-hidden rounded-[1.5rem] border text-left ${sizeClasses[item.size]}`}>
-                <Image src={item.image} alt={item.title} fill sizes="(max-width:768px) 100vw,(max-width:1200px) 50vw,33vw" className="object-cover transition duration-700 group-hover:scale-[1.045]" />
+                <Image src={item.image} alt={item.title} fill sizes="(max-width:768px) 100vw,(max-width:1200px) 50vw,33vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.025]" />
 
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent opacity-90" />
 
@@ -187,9 +188,8 @@ export default function GalleryPage() {
                 <FaXmark />
               </button>
 
-              <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-[var(--border)]">
-                <Image src={selectedItem.image} alt={selectedItem.title} fill sizes="100vw" className="object-cover" />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
+              <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-[var(--border)] bg-[#101015]">
+                <Image src={selectedItem.image} alt={selectedItem.title} fill sizes="100vw" className="object-contain bg-[#101015]" />
               </div>
 
               <div className="relative p-6 sm:p-8 lg:p-10">
