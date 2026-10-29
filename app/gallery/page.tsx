@@ -117,6 +117,13 @@ export default function GalleryPage() {
           </p>
         </motion.div>
 
+        <div className="mt-8 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-5 py-4 sm:px-6">
+          <p className="accent-text text-xs font-semibold uppercase tracking-[0.16em]">Original design · Digital presentation</p>
+          <p className="theme-text-secondary mt-2 text-sm leading-6">
+            Every project begins with original graphic design work. The images shown here are digital mockups and rendered presentations created from those designs to illustrate their real-world applications. The presentation may use AI-assisted tools; the underlying artwork is not AI-generated.
+          </p>
+        </div>
+
         <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12, duration: 0.55 }} className="mt-10 flex flex-wrap gap-2 sm:mt-12">
           {categories.map((category) => {
             const active = activeCategory === category;
@@ -216,6 +223,7 @@ export default function GalleryPage() {
                 <div className="min-w-0">
                   <p className="accent-text text-[10px] font-semibold uppercase tracking-[0.16em]">{selectedItem.category} · {selectedItem.year}</p>
                   <h2 className="theme-text mt-1 truncate text-base font-bold sm:text-xl">{selectedItem.title}</h2>
+                  <p className="theme-text-muted mt-1 text-xs">Original artwork · Digitally rendered mockup</p>
                 </div>
                 <button type="button" onClick={() => setSelectedItem(null)} className="theme-secondary-button shrink-0 rounded-full border px-4 py-2 text-sm font-medium">
                   Close
