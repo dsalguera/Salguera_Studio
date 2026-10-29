@@ -14,7 +14,6 @@ type GalleryItem = {
   description: string;
   image: string;
   year: string;
-  size: "small" | "medium" | "large" | "wide";
 };
 
 const categories: Category[] = ["All", "Branding", "Print", "Advertising"];
@@ -26,7 +25,6 @@ const galleryItems: GalleryItem[] = [
     description: "A playful tropical identity brought to life through a realistic branded product mockup.",
     image: "/gallery/solado.webp",
     year: "2026",
-    size: "large",
   },
   {
     title: "Tom Summer Adventure",
@@ -34,7 +32,6 @@ const galleryItems: GalleryItem[] = [
     description: "Adventure brand identity presented as a real-world vehicle decal.",
     image: "/gallery/tom.webp",
     year: "2026",
-    size: "medium",
   },
   {
     title: "Remodeling Bonilla LLC",
@@ -42,7 +39,6 @@ const galleryItems: GalleryItem[] = [
     description: "A confident visual identity for a remodeling business, shown in a professional brand mockup.",
     image: "/gallery/bonilla.webp",
     year: "2026",
-    size: "medium",
   },
   {
     title: "Mantaraya ATV Adventures",
@@ -50,7 +46,6 @@ const galleryItems: GalleryItem[] = [
     description: "Promotional artwork for an outdoor adventure experience in Costa Rica.",
     image: "/gallery/mantaraya.webp",
     year: "2026",
-    size: "medium",
   },
   {
     title: "Hotel Restaurante Buddha",
@@ -58,7 +53,6 @@ const galleryItems: GalleryItem[] = [
     description: "Hospitality signage and guest-facing information with a distinctive visual identity.",
     image: "/gallery/buddha.webp",
     year: "2026",
-    size: "wide",
   },
   {
     title: "Hotel Las Brisas",
@@ -66,7 +60,6 @@ const galleryItems: GalleryItem[] = [
     description: "Restaurant menu design presented in an authentic hospitality setting.",
     image: "/gallery/lasbrisas.webp",
     year: "2026",
-    size: "large",
   },
   {
     title: "Gabriel’s Custom Tours",
@@ -74,16 +67,8 @@ const galleryItems: GalleryItem[] = [
     description: "Tourism brand identity designed for a memorable local experience.",
     image: "/gallery/gabrieltours.webp",
     year: "2026",
-    size: "medium",
   },
 ];
-
-const sizeClasses = {
-  small: "md:col-span-1 md:row-span-1",
-  medium: "md:col-span-1 md:row-span-2",
-  large: "md:col-span-2 md:row-span-2",
-  wide: "md:col-span-2 md:row-span-1",
-};
 
 export default function GalleryPage() {
   const [activeCategory, setActiveCategory] = useState<Category>("All");
@@ -94,8 +79,13 @@ export default function GalleryPage() {
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") setSelectedItem(null);
     };
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
     window.addEventListener("keydown", handleEscape);
-    return () => window.removeEventListener("keydown", handleEscape);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleEscape);
+    };
   }, [selectedItem]);
 
   const filteredItems = useMemo(() => {
@@ -139,28 +129,29 @@ export default function GalleryPage() {
           })}
         </motion.div>
 
-        <motion.div layout className="mt-8 grid auto-rows-[220px] grid-cols-1 gap-4 md:grid-cols-3 md:auto-rows-[190px] lg:auto-rows-[220px]">
+        <motion.div layout className="mt-8 grid grid-cols-1 items-stretch gap-5 sm:grid-cols-2 xl:grid-cols-3">
           <AnimatePresence mode="popLayout">
             {filteredItems.map((item, index) => (
-              <motion.button key={item.title} layout initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.96 }} transition={{ duration: 0.4, delay: index * 0.035, ease: [0.22, 1, 0.36, 1] }} type="button" onClick={() => setSelectedItem(item)} className={`theme-card group relative overflow-hidden rounded-[1.5rem] border text-left ${sizeClasses[item.size]}`}>
-                <Image src={item.image} alt={item.title} fill sizes="(max-width:768px) 100vw,(max-width:1200px) 50vw,33vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.025]" />
+              <motion.button key={item.title} layout initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.96 }} transition={{ duration: 0.4, delay: index * 0.035, ease: [0.22, 1, 0.36, 1] }} type="button" onClick={() => setSelectedItem(item)} className="theme-card group relative flex min-h-[360px] flex-col overflow-hidden rounded-[1.5rem] border text-left sm:min-h-0">
+                <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden bg-[#101015]">
+                  <Image src={item.image} alt={item.title} fill sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.025]" />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 to-transparent" />
+                </div>
 
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent opacity-90" />
-
-                <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
+                <div className="flex flex-1 flex-col p-5 sm:p-6">
                   <div className="flex items-center justify-between gap-4">
-                    <span className="rounded-full border border-white/15 bg-black/40 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.14em] text-white backdrop-blur-xl">
+                    <span className="rounded-full border border-[var(--border)] bg-[var(--surface)] px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.14em] text-[var(--text-secondary)]">
                       {item.category}
                     </span>
 
-                    <span className="text-xs font-medium text-white/70">{item.year}</span>
+                    <span className="theme-text-muted text-xs font-medium">{item.year}</span>
                   </div>
 
-                  <h2 className="mt-4 text-xl font-bold leading-tight text-white sm:text-2xl">{item.title}</h2>
+                  <h2 className="mt-4 theme-text text-xl font-bold leading-tight sm:text-2xl">{item.title}</h2>
 
-                  <p className="mt-2 line-clamp-2 text-sm leading-6 text-white/70">{item.description}</p>
+                  <p className="mt-2 line-clamp-2 theme-text-secondary text-sm leading-6">{item.description}</p>
 
-                  <span className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-white">
+                  <span className="theme-text mt-auto inline-flex items-center gap-2 pt-5 text-sm font-medium">
                     View project
                     <FaArrowRight className="text-xs transition-transform duration-300 group-hover:translate-x-1" />
                   </span>
@@ -180,41 +171,58 @@ export default function GalleryPage() {
 
       <AnimatePresence>
         {selectedItem && (
-          <>
-            <motion.button type="button" aria-label="Close gallery preview" onClick={() => setSelectedItem(null)} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[70] bg-black/70 backdrop-blur-md" />
-
-            <motion.div initial={{ opacity: 0, y: 24, scale: 0.97 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 20, scale: 0.97 }} transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }} className="theme-card fixed inset-x-4 top-1/2 z-[80] mx-auto max-h-[88svh] max-w-5xl -translate-y-1/2 overflow-y-auto rounded-[1.75rem] border sm:inset-x-8">
-              <button type="button" onClick={() => setSelectedItem(null)} aria-label="Close preview" className="theme-surface theme-text absolute right-4 top-4 z-20 flex h-11 w-11 items-center justify-center rounded-full border transition hover:scale-105">
+          <motion.div
+            className="fixed inset-0 z-[80] flex items-center justify-center p-3 sm:p-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            role="presentation"
+            onMouseDown={(event) => {
+              if (event.target === event.currentTarget) setSelectedItem(null);
+            }}
+          >
+            <div className="pointer-events-none absolute inset-0 bg-black/85 backdrop-blur-sm" />
+            <motion.section
+              role="dialog"
+              aria-modal="true"
+              aria-label={`Preview: ${selectedItem.title}`}
+              initial={{ opacity: 0, scale: 0.97 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.97 }}
+              transition={{ duration: 0.2 }}
+              className="theme-card relative flex h-[min(90dvh,900px)] min-h-0 w-full max-w-6xl flex-col overflow-hidden rounded-2xl border shadow-2xl"
+            >
+              <button
+                type="button"
+                onClick={() => setSelectedItem(null)}
+                aria-label="Close preview"
+                className="theme-surface theme-text absolute right-3 top-3 z-20 flex h-10 w-10 items-center justify-center rounded-full border shadow-lg transition hover:scale-105"
+              >
                 <FaXmark />
               </button>
 
-              <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-[var(--border)] bg-[#101015]">
-                <Image src={selectedItem.image} alt={selectedItem.title} fill sizes="100vw" className="object-contain bg-[#101015]" />
+              <div className="relative min-h-0 flex-1 bg-[#101015]">
+                <Image
+                  src={selectedItem.image}
+                  alt={selectedItem.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 90vw"
+                  className="object-contain"
+                  priority
+                />
               </div>
 
-              <div className="relative p-6 sm:p-8 lg:p-10">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="theme-surface accent-text rounded-full border px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.14em]">{selectedItem.category}</span>
-                  <span className="theme-surface theme-text-muted rounded-full border px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.14em]">{selectedItem.year}</span>
+              <div className="flex shrink-0 items-center justify-between gap-3 border-t border-[var(--border)] px-4 py-3 sm:px-6 sm:py-4">
+                <div className="min-w-0">
+                  <p className="accent-text text-[10px] font-semibold uppercase tracking-[0.16em]">{selectedItem.category} · {selectedItem.year}</p>
+                  <h2 className="theme-text mt-1 truncate text-base font-bold sm:text-xl">{selectedItem.title}</h2>
                 </div>
-
-                <h2 className="theme-text mt-5 text-3xl font-black tracking-[-0.035em] sm:text-4xl">{selectedItem.title}</h2>
-
-                <p className="theme-text-secondary mt-4 max-w-3xl text-base leading-7 sm:text-lg sm:leading-8">{selectedItem.description}</p>
-
-                <div className="mt-7 flex flex-wrap gap-3">
-                  <Link href="/contact" className="theme-primary-button inline-flex items-center gap-3 rounded-full px-6 py-3.5 font-semibold">
-                    Start a similar project
-                    <FaArrowRight className="text-sm" />
-                  </Link>
-
-                  <button type="button" onClick={() => setSelectedItem(null)} className="theme-secondary-button rounded-full border px-6 py-3.5 font-medium">
-                    Close preview
-                  </button>
-                </div>
+                <button type="button" onClick={() => setSelectedItem(null)} className="theme-secondary-button shrink-0 rounded-full border px-4 py-2 text-sm font-medium">
+                  Close
+                </button>
               </div>
-            </motion.div>
-          </>
+            </motion.section>
+          </motion.div>
         )}
       </AnimatePresence>
     </main>
