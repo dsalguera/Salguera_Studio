@@ -300,18 +300,15 @@ html[data-theme="light"] .navbar-logo {
 }
 
 .background-float-one {
-  animation:background-float-one 36s ease-in-out infinite;
-  will-change:transform;
+  animation:none;
 }
 
 .background-float-two {
-  animation:background-float-two 44s ease-in-out infinite;
-  will-change:transform;
+  animation:none;
 }
 
 .background-float-three {
-  animation:background-float-three 50s ease-in-out infinite;
-  will-change:transform;
+  animation:none;
 }
 
 .mobile-menu-shell {
@@ -368,5 +365,13 @@ html[data-theme="light"] .navbar-logo {
     animation-duration:0.01ms !important;
     animation-iteration-count:1 !important;
     transition-duration:0.01ms !important;
+  }
+}
+/* V3.3: avoid expensive background filtering on touch / low-motion devices.
+   The same gradients, borders and colors remain visible. */
+@media (hover:none), (prefers-reduced-motion:reduce) {
+  .theme-card, .theme-item, .theme-surface {
+    -webkit-backdrop-filter:none;
+    backdrop-filter:none;
   }
 }

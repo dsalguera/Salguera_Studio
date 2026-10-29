@@ -26,7 +26,7 @@ const projects: Project[] = [
     title: "NOVA Academy",
     description:
       "A modern, responsive educational landing page developed from a visual design concept using HTML, CSS, and JavaScript. Featuring a Human × Technology visual identity, immersive layouts, interactive elements, and a refined experience across desktop, tablet, and mobile devices.",
-    image: "/projects/nova-academy.png",
+    image: "/projects/nova-academy.webp",
     tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
     github: "https://github.com/dsalguera/NOVA_Studio",
     live: "https://dsalguera.github.io/NOVA_Studio/",
@@ -37,7 +37,7 @@ const projects: Project[] = [
     title: "Food Lovers",
     description:
       "A modern, responsive food and restaurant landing page focused on engaging visuals, clean layouts, and intuitive navigation. A creative design concept transformed into an engaging web experience.",
-    image: "/projects/food-lovers.png",
+    image: "/projects/food-lovers.webp",
     tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
     github: "https://github.com/dsalguera/Food_Lovers",
     live: "https://dsalguera.github.io/Food_Lovers/",
@@ -48,7 +48,7 @@ const projects: Project[] = [
     title: "LuckyTimes V3",
     description:
       "A modern full-stack lottery management platform featuring an interactive dashboard, drawing schedules, results management, administrative tools, and responsive interfaces designed for real-world operations.",
-    image: "/projects/luckytimes.png",
+    image: "/projects/luckytimes.webp",
     tech: ["Next.js", "React", "TypeScript", "MySQL"],
     github: "https://github.com/dsalguera/LuckyTimesV3",
     live: "https://luckytimes.salguerastudio.com/",
